@@ -9,7 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iridium_reader_widget/util/router.dart';
 import 'package:iridium_reader_widget/views/viewers/ui/annotations_panel.dart';
 import 'package:iridium_reader_widget/views/viewers/ui/content_panel.dart';
-import 'package:iridium_reader_widget/views/viewers/ui/settings/general_settings_panel.dart';
 import 'package:iridium_reader_widget/views/viewers/ui/settings/menu_support.dart';
 import 'package:iridium_reader_widget/views/viewers/ui/settings/settings_panel.dart';
 import 'package:mno_navigator/epub.dart';
@@ -82,7 +81,11 @@ class ReaderAppBarState extends State<ReaderAppBar> {
                     ])))),
       );
 
-  void _onBookmarkPressed() => readerContext.toggleBookmark();
+  void _onBookmarkPressed() {
+    ReaderAnnotationBloc readerAnnotationBloc =
+        BlocProvider.of<ReaderAnnotationBloc>(context);
+    readerContext.toggleBookmark(readerAnnotationBloc);
+  }
 
   Widget _onMenuPressed() => Padding(
         padding: const EdgeInsets.only(right: 10),

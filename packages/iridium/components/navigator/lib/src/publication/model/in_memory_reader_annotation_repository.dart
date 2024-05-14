@@ -10,6 +10,8 @@ class InMemoryReaderAnnotationRepository extends ReaderAnnotationRepository {
   final List<ReaderAnnotation> annotations = [];
   ReaderAnnotation? position;
 
+  InMemoryReaderAnnotationRepository(
+      {super.readerAnnotationBloc});
   @override
   Future<List<ReaderAnnotation>> allWhere(
           {Predicate<ReaderAnnotation> predicate =
@@ -36,6 +38,7 @@ class InMemoryReaderAnnotationRepository extends ReaderAnnotationRepository {
     _currentId++;
     annotations.add(readerAnnotation);
     notifyBookmark(readerAnnotation);
+    super.readerAnnotationBloc!.add(AddAnnotationsEvent(readerAnnotation));
     return readerAnnotation;
   }
 

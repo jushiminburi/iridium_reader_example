@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mno_navigator/epub.dart';
 import 'package:mno_navigator/publication.dart';
 import 'package:mno_shared/publication.dart';
 
@@ -17,24 +19,33 @@ class AnnotationsPanel extends StatefulWidget {
 }
 
 class AnnotationsPanelState extends State<AnnotationsPanel> {
+  final ReaderAnnotationBloc annotationBloc = ReaderAnnotationBloc();
+
+  @override
+  void initState() {
+    super.initState();
+    annotationBloc.add(InitAnnotationsEvent());
+  }
+
   Future<List<ReaderAnnotation>> get _readerAnnotationsStream =>
       widget.readerContext.readerAnnotationRepository
           .allWhere(predicate: AnnotationTypePredicate(widget.annotationType));
 
   @override
-  Widget build(BuildContext context) => FutureBuilder<List<ReaderAnnotation>>(
-        initialData: const [],
-        future: _readerAnnotationsStream,
-        builder: (context, snapshot) => ListView.builder(
-          itemCount: snapshot.data!.length,
+  Widget build(BuildContext context) =>
+      BlocBuilder<ReaderAnnotationBloc, ReaderAnnotationState>(
+        bloc: annotationBloc,
+        builder: (context, ReaderAnnotationState state) => ListView.builder(
+          itemCount: state.readerAnnotations.length,
           itemBuilder: (context, index) =>
-              itemBuilder(context, snapshot.data![index]),
+              itemBuilder(context, state.readerAnnotations[index]),
         ),
       );
 
   Widget itemBuilder(BuildContext context, ReaderAnnotation readerAnnotation) {
     Locator? locator = Locator.fromJsonString(readerAnnotation.location);
-    String? title = (locator?.title?.isNotEmpty == true) ? locator?.title : null;
+    String? title =
+        (locator?.title?.isNotEmpty == true) ? locator?.title : null;
     String? text = locator?.text.highlight;
     return Material(
       child: ListTile(

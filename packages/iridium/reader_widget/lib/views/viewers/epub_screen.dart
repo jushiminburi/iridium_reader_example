@@ -115,11 +115,12 @@ class EpubScreen extends BookScreen {
 class EpubScreenState extends BookScreenState<EpubScreen, EpubController> {
   late ViewerSettingsBloc _viewerSettingsBloc;
   late ReaderThemeBloc _readerThemeBloc;
+  late ReaderAnnotationBloc _readerAnnotationBloc;
 
   @override
   void initState() {
     super.initState();
-    initDatabase();
+    initInjection();
     _viewerSettingsBloc =
         ViewerSettingsBloc(EpubReaderState("", widget.settings ?? 100));
     debugPrint(widget.theme.toString());
@@ -128,8 +129,11 @@ class EpubScreenState extends BookScreenState<EpubScreen, EpubController> {
         : ReaderThemeConfig.defaultTheme);
   }
 
-  Future<void> initDatabase() async {
-    await DatabaseConfig.init(StoreRef<dynamic, dynamic>.main());
+  void initInjection() {
+    getIt.registerSingleton<ReaderAnnotationBloc>();
+    getIt.factory<ReaderAnnotationRepository>(() =>
+        InMemoryReaderAnnotationRepository(
+            readerAnnotationBloc: getIt<ReaderAnnotationBloc>));
   }
 
   @override
@@ -199,6 +203,8 @@ class EpubScreenState extends BookScreenState<EpubScreen, EpubController> {
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
         providers: [
+          BlocProvider<ReaderAnnotationBloc>(
+              create: (context) => getIt<ReaderAnnotationBloc>()),
           BlocProvider(create: (context) => _viewerSettingsBloc),
           BlocProvider(create: (context) => _readerThemeBloc),
         ],

@@ -4,6 +4,7 @@
 
 export 'package:mno_navigator/src/epub/bloc/current_spine_item_bloc.dart';
 export 'package:mno_navigator/src/epub/bloc/reader_theme_bloc.dart';
+export 'package:mno_navigator/src/epub/bloc/annotations_bloc.dart';
 export 'package:mno_navigator/src/epub/bloc/viewer_settings_bloc.dart';
 export 'package:mno_navigator/src/epub/callbacks/epub_callbacks.dart';
 export 'package:mno_navigator/src/epub/callbacks/epub_webview_listener.dart';

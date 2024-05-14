@@ -7,7 +7,6 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:dartx/dartx.dart';
-import 'package:fimber/fimber.dart';
 import 'package:http/http.dart' as http;
 import 'package:mno_commons/extensions/strings.dart';
 import 'package:mno_commons/io.dart';

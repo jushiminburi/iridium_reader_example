@@ -13,8 +13,8 @@ import 'package:mno_shared/publication.dart';
 abstract class ReaderAnnotationRepository {
   final StreamController<ReaderAnnotation> _bookmarkController;
   final StreamController<List<String>> _deletedIdsController;
-
-  ReaderAnnotationRepository()
+  final ReaderAnnotationBloc? readerAnnotationBloc;
+  ReaderAnnotationRepository({this.readerAnnotationBloc})
       : this._bookmarkController = StreamController.broadcast(),
         this._deletedIdsController = StreamController.broadcast();
 
