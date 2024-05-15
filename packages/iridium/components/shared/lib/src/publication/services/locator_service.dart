@@ -44,6 +44,7 @@ class DefaultLocatorService extends LocatorService {
   Future<Locator?> locate(Locator locator) async =>
       locator.takeIf((it) => readingOrder.firstWithHref(locator.href) != null);
 
+
   @override
   Future<Locator?> locateProgression(double totalProgression) async {
     if (totalProgression < 0.0 || 1.0 < totalProgression) {

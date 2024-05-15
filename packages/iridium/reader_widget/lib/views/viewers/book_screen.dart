@@ -110,7 +110,6 @@ abstract class BookScreenState<T extends BookScreen,
           size: 100, color: Theme.of(context).colorScheme.secondary));
 
   void _displayErrorDialog(BuildContext context, UserException userException) {
-    // TODO open error dialog
     Fimber.d("Display error dialog: $userException");
   }
 

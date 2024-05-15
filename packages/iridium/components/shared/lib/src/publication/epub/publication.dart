@@ -18,3 +18,4 @@ extension PublicationLists on Publication {
   List<Link> get listOfTables => linksWithRole("lot");
   List<Link> get listOfVideoClips => linksWithRole("lov");
 }
+

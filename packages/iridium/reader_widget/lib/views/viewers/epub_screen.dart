@@ -11,12 +11,10 @@ import 'package:iridium_reader_widget/views/viewers/model/fonts.dart';
 import 'package:mno_commons/utils/functions.dart';
 import 'package:mno_navigator/epub.dart';
 import 'package:mno_navigator/publication.dart';
-import 'package:mno_navigator/data.dart';
 import 'package:mno_server/mno_server.dart';
 import 'package:mno_shared/mediatype.dart';
 import 'package:mno_shared/publication.dart';
 import 'package:mno_streamer/parser.dart';
-import 'package:sembast/sembast.dart';
 
 class EpubScreen extends BookScreen {
   final String? location;
@@ -115,7 +113,6 @@ class EpubScreen extends BookScreen {
 class EpubScreenState extends BookScreenState<EpubScreen, EpubController> {
   late ViewerSettingsBloc _viewerSettingsBloc;
   late ReaderThemeBloc _readerThemeBloc;
-  late ReaderAnnotationBloc _readerAnnotationBloc;
 
   @override
   void initState() {
@@ -130,10 +127,10 @@ class EpubScreenState extends BookScreenState<EpubScreen, EpubController> {
   }
 
   void initInjection() {
-    getIt.registerSingleton<ReaderAnnotationBloc>();
-    getIt.factory<ReaderAnnotationRepository>(() =>
+    getIt.registerSingleton<ReaderAnnotationBloc>(ReaderAnnotationBloc());
+    getIt.registerLazySingleton<ReaderAnnotationRepository>(() =>
         InMemoryReaderAnnotationRepository(
-            readerAnnotationBloc: getIt<ReaderAnnotationBloc>));
+            readerAnnotationBloc: getIt<ReaderAnnotationBloc>()));
   }
 
   @override
@@ -222,8 +219,7 @@ class EpubScreenState extends BookScreenState<EpubScreen, EpubController> {
   @override
   Function0<List<RequestHandler>> get handlersProvider => () => [
         AssetsRequestHandler(
-          'packages/mno_navigator/assets',
-          assetProvider: _AssetProvider(),
+          'packages/mno_navigator/assets', assetProvider: _AssetProvider(),
         ),
         FetcherRequestHandler(
             readerContext.publication!, () => readerContext.viewportWidth,

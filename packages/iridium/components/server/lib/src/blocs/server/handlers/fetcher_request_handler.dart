@@ -16,7 +16,7 @@ class FetcherRequestHandler extends RequestHandler {
   final HtmlInjector _htmlInjector;
 
   /// Creates an instance of [FetcherRequestHandler] for a [publication].
-  ///
+  
   /// A [transformData] parameter is optional.
   FetcherRequestHandler(this.publication, this.viewportWidthGetter,
       {List<String> googleFonts = const []})

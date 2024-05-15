@@ -268,7 +268,7 @@ class _InjectHtmlResource extends TransformingResource {
   }
 
   String getHtmlFont({required String fontFamily, required String href}) =>
-      "<style type=\"text/css\"> @font-face{font-family: \"$fontFamily\"; src:url(\"" + href + "\") format('truetype');}</style>\n";
+      "<style type=\"text/css\"> @font-face{font-family: \"$fontFamily\"; src:url(\"$href\") format('truetype');}</style>\n";
 
   String getHtmlLink(String resourceName) =>
       "<link rel=\"stylesheet\" type=\"text/css\" href=\"$resourceName\"/>\n";
