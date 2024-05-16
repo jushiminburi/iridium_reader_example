@@ -21,9 +21,7 @@ class EpubNavigator extends PublicationNavigator {
     required super.onReaderContextCreated,
     required super.wrapper,
     required this.epubController,
-  }) : super(
-          publicationController: epubController
-        );
+  }) : super(publicationController: epubController);
 
   @override
   State<StatefulWidget> createState() => EpubNavigatorState();

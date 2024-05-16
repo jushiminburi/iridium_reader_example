@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// ignore_for_file: deprecated_member_use
+
 import 'dart:async';
 
 import 'package:dartx/dartx.dart';
@@ -138,6 +140,8 @@ class WebViewScreenState extends State<WebViewScreen> {
         .listen((viewportWidth) => _jsApi?.setViewportWidth(viewportWidth));
   }
 
+  ContextMenu optionsContextMenuHight = ContextMenu();
+
   @override
   void dispose() {
     super.dispose();
@@ -167,19 +171,17 @@ class WebViewScreenState extends State<WebViewScreen> {
       ? InAppWebView(
           key: _webViewKey,
           initialUrlRequest: URLRequest(
-              url: Uri.parse(
-                  '${widget.address}/${link.href.removePrefix("/")}')),
+              url: WebUri('${widget.address}/${link.href.removePrefix("/")}')),
           initialOptions: InAppWebViewGroupOptions(
             android: AndroidInAppWebViewOptions(
-              useHybridComposition: true,
-              useShouldInterceptRequest: true,
-              safeBrowsingEnabled: false,
-              cacheMode: AndroidCacheMode.LOAD_NO_CACHE,
-              disabledActionModeMenuItems:
-                  AndroidActionModeMenuItem.MENU_ITEM_SHARE |
-                      AndroidActionModeMenuItem.MENU_ITEM_WEB_SEARCH |
-                      AndroidActionModeMenuItem.MENU_ITEM_PROCESS_TEXT,
-            ),
+                useHybridComposition: true,
+                useShouldInterceptRequest: true,
+                safeBrowsingEnabled: false,
+                cacheMode: AndroidCacheMode.LOAD_NO_CACHE,
+                disabledActionModeMenuItems:
+                    AndroidActionModeMenuItem.MENU_ITEM_SHARE |
+                        AndroidActionModeMenuItem.MENU_ITEM_WEB_SEARCH |
+                        AndroidActionModeMenuItem.MENU_ITEM_PROCESS_TEXT),
             crossPlatform: InAppWebViewOptions(
               useShouldOverrideUrlLoading: true,
               verticalScrollBarEnabled: false,
@@ -210,20 +212,51 @@ class WebViewScreenState extends State<WebViewScreen> {
                 () => LongPressGestureRecognizer()),
           },
           contextMenu: ContextMenu(
-            options:
-                ContextMenuOptions(hideDefaultSystemContextMenuItems: true),
-            onCreateContextMenu: (hitTestResult) async {
-              _jsApi?.let((jsApi) async {
+              menuItems: [
+                ContextMenuItem(
+                    id: 0, title: "Hightlight", action: () async {
+                        _jsApi?.let((jsApi) async {
                 Selection? selection =
                     await jsApi.getCurrentSelection(currentLocator);
                 selection?.offset = webViewOffset();
                 selectionController.add(selection);
               });
-            },
-            onHideContextMenu: () {
-              selectionController.add(null);
-            },
-          ),
+                    }),
+                ContextMenuItem(id: 0, title: "Note", action: () async {})
+              ],
+              onCreateContextMenu: (hitTestResult) async {
+                String selectedText = "";
+                final snackBar = SnackBar(
+                  content: Text(
+                      "Selected text: '$selectedText', of type: ${hitTestResult.type.toString()}"),
+                  duration: const Duration(seconds: 1),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              },
+              onContextMenuActionItemClicked: (menuItem) {
+                final snackBar = SnackBar(
+                  content: Text(
+                      "Menu item with ID ${menuItem.id} and title '${menuItem.title}' clicked!"),
+                  duration: const Duration(seconds: 1),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              }),
+
+          // ContextMenu(
+          //   options:
+          //       ContextMenuOptions(hideDefaultSystemContextMenuItems: true),
+          //   onCreateContextMenu: (hitTestResult) async {
+          //     _jsApi?.let((jsApi) async {
+          //       Selection? selection =
+          //           await jsApi.getCurrentSelection(currentLocator);
+          //       selection?.offset = webViewOffset();
+          //       selectionController.add(selection);
+          //     });
+          //   },
+          //   onHideContextMenu: () {
+          //     selectionController.add(null);
+          //   },
+          // ),
           onWebViewCreated: _onWebViewCreated,
         )
       : const SizedBox.shrink();

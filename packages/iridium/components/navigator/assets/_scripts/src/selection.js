@@ -75,7 +75,6 @@ function getCurrentSelectionText() {
   const textRange = TextRange.fromRange(range).relativeTo(document.body);
   const start = textRange.start.offset;
   const end = textRange.end.offset;
-
   const snippetLength = 200;
 
   // Compute the text before the highlight, ignoring the first "word", which might be cut.
@@ -85,7 +84,7 @@ function getCurrentSelectionText() {
     before = before.slice(firstWordStart + 1);
   }
 
-  // Compute the text after the highlight, ignoring the last "word", which might be cut.
+
   let after = text.slice(end, Math.min(text.length, end + snippetLength));
   let lastWordEnd = Array.from(after.matchAll(/\p{L}\P{L}/gu)).pop();
   if (lastWordEnd !== undefined && lastWordEnd.index > 1) {

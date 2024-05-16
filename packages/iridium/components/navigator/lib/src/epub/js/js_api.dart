@@ -150,11 +150,11 @@ class JsApi {
 
   Future<Selection?> getCurrentSelection(Locator locator) =>
       loadJS("readium.getCurrentSelection();").then((json) {
-        if ((json is Map<String, dynamic>)) {
-          return Selection.fromJson(json, locator);
-        } else {
-          return null;
-        }
+        Map<String, dynamic> jsonConvertable;
+
+        jsonConvertable = TocUtils.convertMap(json);
+
+        return Selection.fromJson(jsonConvertable, locator);
       });
 
   String? epubLayoutToJson(EpubLayout layout) {

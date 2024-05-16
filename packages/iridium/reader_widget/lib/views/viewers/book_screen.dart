@@ -88,17 +88,14 @@ abstract class BookScreenState<T extends BookScreen,
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
         if (snapshot.data!) {
           return WillPopScope(
-            onWillPop: onWillPop,
-            child: Scaffold(
-              body: createPublicationNavigator(
-                waitingScreenBuilder: buildWaitingScreen,
-                displayErrorBuilder: _displayErrorDialog,
-                onReaderContextCreated: onReaderContextCreated,
-                wrapper: buildWidgetWrapper,
-                publicationController: publicationController,
-              ),
-            ),
-          );
+              onWillPop: onWillPop,
+              child: Scaffold(
+                  body: createPublicationNavigator(
+                      waitingScreenBuilder: buildWaitingScreen,
+                      displayErrorBuilder: _displayErrorDialog,
+                      onReaderContextCreated: onReaderContextCreated,
+                      wrapper: buildWidgetWrapper,
+                      publicationController: publicationController)));
         }
         return const SizedBox.shrink();
       });

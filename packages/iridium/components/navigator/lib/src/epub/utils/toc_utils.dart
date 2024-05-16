@@ -29,6 +29,15 @@ class TocUtils {
     return flattenedRoots;
   }
 
+  static Map<String, dynamic> convertMap(Map<dynamic, dynamic> originalMap) =>
+      originalMap.map((key, value) {
+        if (key is String) {
+          return MapEntry(key, value);
+        } else {
+          throw Exception('Invalid key type');
+        }
+      });
+
   static Map<Link, int> mapTableOfContentToSpineItemIndex(
       Publication? publication, List<Link> flattenedTableOfContents) {
     Map<Link, int> result = {};

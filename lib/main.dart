@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:mno_navigator/data.dart';
@@ -29,8 +31,6 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     // return EpubScreen.fromPath(filePath: '/Users/duonghoang/Library/Mobile Documents/com~apple~CloudDocs/Flutter/vhmt_example/assets/images/toc_sub_toc.epub');
-    return EpubScreen.fromPath(
-        filePath:
-            '/Users/vhmt/Desktop/iridium_reader_example/assets/images/toc_sub_toc.epub');
+    return EpubScreen.fromPath( filePath: '/Users/vhmt/Desktop/iridium_reader_example/assets/images/toc_sub_toc.epub');
   }
 }

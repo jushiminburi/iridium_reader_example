@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/widgets.dart';
+import 'package:mno_navigator/epub.dart';
 import 'package:mno_shared/publication.dart';
 
 class Selection {
@@ -25,9 +26,15 @@ class Selection {
   }
 
   static Selection fromJson(Map<String, dynamic> json, Locator locator) {
-    Map<String, dynamic> jsonRect = json["rect"];
+    Map<String, dynamic> jsonConvertable;
+
+    jsonConvertable = TocUtils.convertMap(json);
+
+    Map<String, dynamic> jsonRect =
+        TocUtils.convertMap(jsonConvertable["rect"]);
     return Selection(
-      locator: locator.copy(text: LocatorText.fromJson(json["text"])),
+      locator:
+          locator.copy(text: LocatorText.fromJson( TocUtils.convertMap(jsonConvertable["text"]))),
       rect: jsonRect.rect,
     );
   }

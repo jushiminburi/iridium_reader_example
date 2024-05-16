@@ -144,7 +144,6 @@ class ReadiumChannels extends JavascriptChannels {
   double computeHorizontalScrollExtent() =>
       _spineItemContext.readerContext.viewportWidth.toDouble();
 
-  /// TODO implement display footnote
   bool handleFootnote(String targetElement) => true;
 
   void _onSwipeUp(List<dynamic> arguments) {

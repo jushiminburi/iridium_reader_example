@@ -194,7 +194,6 @@ class ContextMenuOptions {
 
 class InAppWebViewHitTestResultType {
   final int _value;
-
   const InAppWebViewHitTestResultType._internal(this._value);
 
   static final Set<InAppWebViewHitTestResultType> values = {
@@ -205,7 +204,7 @@ class InAppWebViewHitTestResultType {
     InAppWebViewHitTestResultType.IMAGE_TYPE,
     InAppWebViewHitTestResultType.SRC_ANCHOR_TYPE,
     InAppWebViewHitTestResultType.SRC_IMAGE_ANCHOR_TYPE,
-    InAppWebViewHitTestResultType.EDIT_TEXT_TYPE,
+    InAppWebViewHitTestResultType.EDIT_TEXT_TYPE
   };
 
   static const UNKNOWN_TYPE = InAppWebViewHitTestResultType._internal(0);
