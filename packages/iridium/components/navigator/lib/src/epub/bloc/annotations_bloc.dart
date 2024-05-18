@@ -57,7 +57,7 @@ class ClearAnnotationsEvent extends ReaderAnnotationsEvent {
 @immutable
 class ReaderAnnotationState extends Equatable {
   final List<ReaderAnnotation> readerAnnotations;
-  const ReaderAnnotationState(this.readerAnnotations);
+  const ReaderAnnotationState(this.readerAnnotations); 
 
   @override
   List<Object> get props => [readerAnnotations];

@@ -101,14 +101,14 @@ class ReaderAppBarState extends State<ReaderAppBar> {
                     context,
                     AnnotationsPanel(
                         readerContext: readerContext,
-                        annotationType: AnnotationType.bookmark));
+                        annotationType: AnnotationType.highlight));
                 break;
               case 2:
                 MyRouter.pushRoute(
                     context,
                     AnnotationsPanel(
                         readerContext: readerContext,
-                        annotationType: AnnotationType.highlight));
+                        annotationType: AnnotationType.bookmark));
                 break;
               default:
             }

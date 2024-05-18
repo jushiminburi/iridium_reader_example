@@ -20,12 +20,10 @@ class HttpResponse extends Response<io.HttpResponse> {
   void write(Object? object) => response.write(object);
 
   @override
-  set contentType(io.ContentType? value) =>
-      response.headers.contentType = value;
+  set contentType(io.ContentType? value) => response.headers.contentType = value;
 
   @override
-  void setHeader(String name, Object value) =>
-      response.headers.add(name, value);
+  void setHeader(String name, Object value) =>response.headers.add(name, value);
 
   @override
   String? getHeader(String name) => response.headers.value(name);

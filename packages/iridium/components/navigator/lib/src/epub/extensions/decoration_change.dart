@@ -82,9 +82,8 @@ extension ReaderAnnotationDecoration on ReaderAnnotation {
       // Decoration for the actual highlight / underline.
       if (decorationStyle != null)
         createDecoration(
-          idSuffix: HtmlDecorationTemplate.highlightSuffix,
-          style: decorationStyle,
-        ),
+            idSuffix: HtmlDecorationTemplate.highlightSuffix,
+            style: decorationStyle),
       // TODO Add support for DecorationStyleAnnotationMark
       // Additional page margin icon decoration, if the highlight has an associated note.
       if (annotation != null && annotation!.isNotEmpty)

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:async';
 import 'dart:io';
 
@@ -122,17 +124,13 @@ abstract class BookScreenState<T extends BookScreen,
       Stack(
         children: <Widget>[
           buildBackground(),
-          SafeArea(
-            child: child,
-          ),
+          SafeArea(child: child),
           Align(
-            alignment: Alignment.bottomCenter,
-            child: ReaderToolbar(
-              readerContext: readerContext,
-              onSkipLeft: publicationController.onSkipLeft,
-              onSkipRight: publicationController.onSkipRight,
-            ),
-          ),
+              alignment: Alignment.bottomCenter,
+              child: ReaderToolbar(
+                  readerContext: readerContext,
+                  onSkipLeft: publicationController.onSkipLeft,
+                  onSkipRight: publicationController.onSkipRight)),
           SafeArea(
             top: false,
             child: Align(

@@ -7,7 +7,6 @@ import 'package:mno_navigator/publication.dart';
 import 'package:mno_navigator/src/epub/widget/webview_screen_state.dart';
 //     if (dart.library.html) 'package:mno_navigator/src/epub/widget/webview_screen_state_stub.dart'
 //     if (dart.library.js) 'package:mno_navigator/src/epub/widget/webview_screen_state_stub.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:mno_shared/publication.dart';
 
 class WebViewScreen extends StatefulWidget {

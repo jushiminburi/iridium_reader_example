@@ -4,10 +4,7 @@ class HighlightStyle {
   static const HighlightStyle highlight = HighlightStyle._(0, "highlight");
   static const HighlightStyle underline = HighlightStyle._(1, "underline");
 
-  static const List<HighlightStyle> values = [
-    highlight,
-    underline,
-  ];
+  static const List<HighlightStyle> values = [highlight, underline];
   final int id;
   final String value;
 
@@ -19,3 +16,4 @@ class HighlightStyle {
   @override
   String toString() => '$runtimeType{id: $id, value: $value}';
 }
+

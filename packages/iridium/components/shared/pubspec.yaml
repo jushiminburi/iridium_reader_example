@@ -19,6 +19,7 @@ dependencies:
   image: ^4.0.17
   intl: ^0.18.1
   meta: ^1.9.1
+  dartz: ^0.10.1
   universal_io: ^2.2.1
   xml: ^6.3.0
   mno_commons:

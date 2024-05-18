@@ -120,7 +120,6 @@ class EpubScreenState extends BookScreenState<EpubScreen, EpubController> {
     initInjection();
     _viewerSettingsBloc =
         ViewerSettingsBloc(EpubReaderState("", widget.settings ?? 100));
-    debugPrint(widget.theme.toString());
     _readerThemeBloc = ReaderThemeBloc(widget.theme != null
         ? ReaderThemeConfig.fromJson(widget.theme!)
         : ReaderThemeConfig.defaultTheme);
@@ -218,9 +217,8 @@ class EpubScreenState extends BookScreenState<EpubScreen, EpubController> {
 
   @override
   Function0<List<RequestHandler>> get handlersProvider => () => [
-        AssetsRequestHandler(
-          'packages/mno_navigator/assets', assetProvider: _AssetProvider(),
-        ),
+        AssetsRequestHandler('packages/mno_navigator/assets',
+            assetProvider: _AssetProvider()),
         FetcherRequestHandler(
             readerContext.publication!, () => readerContext.viewportWidth,
             googleFonts: Fonts.googleFonts)

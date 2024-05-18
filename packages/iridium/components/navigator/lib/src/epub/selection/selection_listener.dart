@@ -7,7 +7,10 @@ abstract class SelectionListener {
   final ReaderContext readerContext;
   final BuildContext context;
 
-  SelectionListener(this.readerContext, this.context);
+  SelectionListener(
+    this.readerContext,
+    this.context,
+  );
 
   JsApi? get jsApi => readerContext.currentSpineItemContext?.jsApi;
 
@@ -54,7 +57,7 @@ abstract class SelectionListener {
 
   void createHighlight(Selection selection, HighlightStyle? style, Color? color,
           {String? annotation}) =>
-      readerAnnotationRepository
+      getIt<ReaderAnnotationRepository>()
           .createHighlight(readerContext.paginationInfo, selection.locator,
               style, color?.value, annotation)
           .then((highlight) {

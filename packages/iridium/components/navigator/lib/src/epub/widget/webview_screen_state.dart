@@ -48,6 +48,8 @@ class WebViewScreenState extends State<WebViewScreen> {
   late StreamSubscription<List<String>> deletedAnnotationIdsSubscription;
   late StreamSubscription<int> viewportWidthSubscription;
 
+  List<ReaderAnnotation> annotationsLoader = <ReaderAnnotation>[];
+
   bool isLoaded = false;
 
   InAppWebViewController? _controller;
@@ -71,21 +73,18 @@ class WebViewScreenState extends State<WebViewScreen> {
   @override
   void initState() {
     super.initState();
-    // Enable hybrid composition (see https://pub.dev/packages/webview_flutter/versions/2.8.0)
-    // if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView(); // For Hybrid Composition C (faster) - Default on 3.0.0
-    // if (Platform.isAndroid) WebView.platform = AndroidWebView(); // For Virtual Display (slower)
-    // Fix for blank WebViews with 3.0.0 (https://github.com/flutter/flutter/issues/74626)
+    getIt<ReaderAnnotationBloc>().add(InitAnnotationsEvent());
     WidgetsBinding.instance.addPostFrameCallback((callback) {
       setState(() {
         isLoaded = true;
       });
     });
+    annotationsLoader = getIt<ReaderAnnotationBloc>().state.readerAnnotations;
     LinkPagination linkPagination = publication.paginationInfo[spineItem]!;
     _spineItemContext = SpineItemContext(
-      spineItemIndex: position,
-      readerContext: readerContext,
-      linkPagination: linkPagination,
-    );
+        spineItemIndex: position,
+        readerContext: readerContext,
+        linkPagination: linkPagination);
     _serverBloc = BlocProvider.of<ServerBloc>(context);
     _readerThemeBloc = BlocProvider.of<ReaderThemeBloc>(context);
     _viewerSettingsBloc = BlocProvider.of<ViewerSettingsBloc>(context);
@@ -139,8 +138,6 @@ class WebViewScreenState extends State<WebViewScreen> {
     viewportWidthSubscription = readerContext.viewportWidthStream
         .listen((viewportWidth) => _jsApi?.setViewportWidth(viewportWidth));
   }
-
-  ContextMenu optionsContextMenuHight = ContextMenu();
 
   @override
   void dispose() {
@@ -201,6 +198,7 @@ class WebViewScreenState extends State<WebViewScreen> {
                   .onRequest(AndroidRequest(request))
                   .then((androidResponse) => androidResponse.response);
             }
+            return null;
           },
           shouldOverrideUrlLoading: (controller, navigationAction) async =>
               NavigationActionPolicy.ALLOW,
@@ -212,51 +210,22 @@ class WebViewScreenState extends State<WebViewScreen> {
                 () => LongPressGestureRecognizer()),
           },
           contextMenu: ContextMenu(
-              menuItems: [
-                ContextMenuItem(
-                    id: 0, title: "Hightlight", action: () async {
-                        _jsApi?.let((jsApi) async {
-                Selection? selection =
-                    await jsApi.getCurrentSelection(currentLocator);
-                selection?.offset = webViewOffset();
-                selectionController.add(selection);
-              });
-                    }),
-                ContextMenuItem(id: 0, title: "Note", action: () async {})
-              ],
-              onCreateContextMenu: (hitTestResult) async {
-                String selectedText = "";
-                final snackBar = SnackBar(
-                  content: Text(
-                      "Selected text: '$selectedText', of type: ${hitTestResult.type.toString()}"),
-                  duration: const Duration(seconds: 1),
-                );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              },
-              onContextMenuActionItemClicked: (menuItem) {
-                final snackBar = SnackBar(
-                  content: Text(
-                      "Menu item with ID ${menuItem.id} and title '${menuItem.title}' clicked!"),
-                  duration: const Duration(seconds: 1),
-                );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              }),
+            menuItems: [
+              ContextMenuItem(
+                  id: 0,
+                  title: "Chú thích",
+                  action: () async {
+                    _jsApi?.let((jsApi) async {
+                      Selection? selection =
+                          await jsApi.getCurrentSelection(currentLocator);
+                      selection?.offset = webViewOffset();
+                      selectionController.add(selection);
+                    });
+                  })
+            ],
+          ),
 
-          // ContextMenu(
-          //   options:
-          //       ContextMenuOptions(hideDefaultSystemContextMenuItems: true),
-          //   onCreateContextMenu: (hitTestResult) async {
-          //     _jsApi?.let((jsApi) async {
-          //       Selection? selection =
-          //           await jsApi.getCurrentSelection(currentLocator);
-          //       selection?.offset = webViewOffset();
-          //       selectionController.add(selection);
-          //     });
-          //   },
-          //   onHideContextMenu: () {
-          //     selectionController.add(null);
-          //   },
-          // ),
+          
           onWebViewCreated: _onWebViewCreated,
         )
       : const SizedBox.shrink();
@@ -284,15 +253,16 @@ class WebViewScreenState extends State<WebViewScreen> {
 
   Future _loadDecorations() async {
     String activeId = "";
-    List<ReaderAnnotation> highlights =
-        await readerContext.readerAnnotationRepository.allWhere(
-            predicate: AnnotationTypeAndDocumentPredicate(
-                spineItem.href, AnnotationType.highlight));
+    List<ReaderAnnotation> highlights = annotationsLoader
+        .where((element) => element.annotationType != AnnotationType.bookmark)
+        .toList();
+    //     await readerContext.readerAnnotationRepository.allWhere(
+    //         predicate: AnnotationTypeAndDocumentPredicate(
+    //             spineItem.href, AnnotationType.highlight));
     Map<String, List<Decoration>> decorators = {
       HtmlDecorationTemplate.highlightGroup: highlights.fold(
           [],
-          (list, highlight) => list
-            ..addAll(
+          (list, highlight) => list..addAll(
                 highlight.toDecorations(isActive: highlight.id == activeId)))
     };
     _jsApi?.registerDecorationTemplates(decorators);
@@ -313,7 +283,6 @@ class WebViewScreenState extends State<WebViewScreen> {
   }
 
   Future initJsHandlers(InAppWebViewController webViewController) async {
-    // Fimber.d("_onWebViewCreated: $webViewController");
     _controller = webViewController;
     HtmlDecorationTemplates decorationTemplates =
         HtmlDecorationTemplates.defaultTemplates();
@@ -329,7 +298,6 @@ class WebViewScreenState extends State<WebViewScreen> {
     _spineItemContext.jsApi = _jsApi;
     for (MapEntry<String, HandlerCallback> entry
         in epubCallbacks.channels.entries) {
-      // Fimber.d("========== Adding Handler: ${entry.key}");
       _controller?.addJavaScriptHandler(
           handlerName: entry.key, callback: entry.value);
     }

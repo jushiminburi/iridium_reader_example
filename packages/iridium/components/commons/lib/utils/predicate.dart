@@ -33,7 +33,6 @@ abstract class Predicate<T> {
   }
 
   void addValueInCondition(String field, List<Object> values) {
-    //Cette requête renvoie document dans lequel le field est = a l'une des valeurs.
     _addInArrayCondition(field, values, ConditionType.whereIn);
   }
 

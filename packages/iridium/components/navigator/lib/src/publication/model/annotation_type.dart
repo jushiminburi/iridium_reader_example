@@ -23,3 +23,4 @@ class AnnotationType {
   @override
   String toString() => 'AnnotationType.$name';
 }
+
