@@ -91,8 +91,7 @@ class WebViewScreenState extends State<WebViewScreen> {
     _currentSpineItemBloc = BlocProvider.of<CurrentSpineItemBloc>(context);
     webViewHorizontalGestureRecognizer = WebViewHorizontalGestureRecognizer(
         chapNumber: position, link: spineItem, readerContext: readerContext);
-    selectionListener =
-        readerContext.selectionListenerFactory.create(readerContext, context);
+    selectionListener = readerContext.selectionListenerFactory.create(readerContext, context);
     epubCallbacks = EpubCallbacks(
         _spineItemContext,
         _viewerSettingsBloc,

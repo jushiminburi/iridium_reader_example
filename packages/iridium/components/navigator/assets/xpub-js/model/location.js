@@ -1,3 +1,4 @@
+
 var MNOLocation = function(cfi) {
 	if (cfi instanceof MNOCFI) {
 		cfi = cfi.toString();
@@ -66,10 +67,7 @@ MNOLocation.fromHighlight = function(highlight) {
 };
 
 MNOLocation.fromSelection = function(selection) {
-	if (!selection) {
-		return null;
-	}
-
+	if (!selection) { return null; }
 	var location = new MNOLocation()
 	location.idref = selection.idref;
 	location.elementCfi = selection.cfi;
@@ -81,7 +79,6 @@ MNOLocation.fromBookmark = function(bookmark) {
 	if ($.type(bookmark) == "string") {
 		bookmark = JSON.parse(bookmark);
 	}
-
 	var location = new MNOLocation()
 	location.idref = bookmark.idref;
 	location.elementCfi = bookmark.contentCFI;
@@ -92,9 +89,7 @@ MNOLocation.fromBookmark = function(bookmark) {
 MNOLocation.prototype.updateCFI = function() {
 	if (!this.idref || this.cfi)
 		return;
-
 	var cfi = null;
-
 	if (this.elementCfi) {
 		cfi = MNOCFI.fromElementCFI(this.elementCfi, this.idref);
 	}

@@ -82,9 +82,7 @@ class ReaderAppBarState extends State<ReaderAppBar> {
       );
 
   void _onBookmarkPressed() {
-    ReaderAnnotationBloc readerAnnotationBloc =
-        BlocProvider.of<ReaderAnnotationBloc>(context);
-    readerContext.toggleBookmark(readerAnnotationBloc);
+    readerContext.toggleBookmark();
   }
 
   Widget _onMenuPressed() => Padding(

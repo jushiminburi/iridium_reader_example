@@ -37,7 +37,7 @@ class InMemoryReaderAnnotationRepository extends ReaderAnnotationRepository {
     _currentId++;
     annotations.add(readerAnnotation);
     notifyBookmark(readerAnnotation);
-    super.readerAnnotationBloc!.add(AddAnnotationsEvent(readerAnnotation));
+    getIt<ReaderAnnotationBloc>().add(AddAnnotationsEvent(readerAnnotation));
     return readerAnnotation;
   }
 

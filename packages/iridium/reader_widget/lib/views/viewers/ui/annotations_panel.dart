@@ -50,11 +50,12 @@ class AnnotationsPanelState extends State<AnnotationsPanel> {
               }
               return ListView.separated(
                 itemCount: readerAnnotations.length,
-                itemBuilder: (context, index) =>
-                    itemBuilderHighlight(context, readerAnnotations[index]),
-                separatorBuilder: (BuildContext context, int index) => Divider(
-                  color: Color(0xffE0E0E0),
-                ),
+                itemBuilder: (context, index) => _annotationType ==
+                        AnnotationType.bookmark
+                    ? itemBuilderBookmark(context, readerAnnotations[index])
+                    : itemBuilderHighlight(context, readerAnnotations[index]),
+                separatorBuilder: (BuildContext context, int index) =>
+                    const Divider(color: Color(0xffE0E0E0)),
               );
             }),
       );
@@ -91,7 +92,9 @@ class AnnotationsPanelState extends State<AnnotationsPanel> {
         title: Text(title ?? text ?? ""),
         subtitle: Padding(
           padding: const EdgeInsets.only(top: 10),
-          child: Text("note: ${readerAnnotation.annotation ?? ""}"),
+          child: readerAnnotation.annotation != null
+              ? Text("note: ${readerAnnotation.annotation ?? ""}")
+              : null,
         ),
         onTap: () => _onTap(readerAnnotation),
       ),

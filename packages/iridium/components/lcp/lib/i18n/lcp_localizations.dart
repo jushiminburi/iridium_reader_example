@@ -3,7 +3,6 @@
 // found in the LICENSE file.
 
 import 'dart:async';
-
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:mno_lcp/i18n/localizations/messages_all.dart';

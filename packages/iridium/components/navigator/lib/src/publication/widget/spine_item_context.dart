@@ -55,7 +55,6 @@ class SpineItemContext {
 
   void notifyPaginationInfo(PaginationInfo paginationInfo) {
     currentPaginationInfo = paginationInfo;
-    // debugPrint('paginfo: ${currentPaginationInfo?.json}');
     if (!_paginationInfoStreamController.isClosed) {
       _paginationInfoStreamController.add(paginationInfo);
     }

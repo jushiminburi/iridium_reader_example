@@ -158,12 +158,15 @@ readium.initPagination = function () {
       : highestPageNumberDivSelector;
 
     for (let i = 0; i < nbCols; i++) {
+      console.log("consolelog")
       let observer = new IntersectionObserver(
         function (entries) {
           if (entries[0].isIntersecting) {
             flutter.onPaginationInfo(
               createPaginationInfo(i, nbCols, nbThumbnails)
+             
             );
+            console.log("consolelog",createPaginationInfo)
           }
         },
         { threshold: [0.99] }
@@ -186,6 +189,7 @@ readium.initPagination = function () {
           flutter.oOnToggleBookmark(
             createPaginationInfo(i, nbCols, nbThumbnails)
           );
+          console.log("consolelog",createPaginationInfo)
         },
         false
       );

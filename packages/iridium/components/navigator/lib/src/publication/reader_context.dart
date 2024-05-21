@@ -148,10 +148,10 @@ class ReaderContext {
     _toolbarStreamController.add(toolbarVisibility);
   }
 
-  void toggleBookmark(ReaderAnnotationBloc bloc) {
+  void toggleBookmark() {
     PaginationInfo? paginationInfo = this.paginationInfo;
     if (paginationInfo != null) {
-      getIt<ReaderAnnotationRepository>().createBookmark(paginationInfo);
+      readerAnnotationRepository.createBookmark(paginationInfo);
     }
   }
 

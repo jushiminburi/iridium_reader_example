@@ -57,10 +57,7 @@ class HighlightPopup extends SelectionPopup {
   Widget buildColorOption(Color color, VoidCallback action) => IconButton(
         onPressed: action,
         icon: Container(
-          decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle,
-          ),
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
         ),
       );
 

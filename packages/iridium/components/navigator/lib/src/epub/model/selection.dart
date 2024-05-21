@@ -29,7 +29,6 @@ class Selection {
     Map<String, dynamic> jsonConvertable;
 
     jsonConvertable = TocUtils.convertMap(json);
-
     Map<String, dynamic> jsonRect =
         TocUtils.convertMap(jsonConvertable["rect"]);
     return Selection(
