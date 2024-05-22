@@ -2,9 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:mno_commons/utils/jsonable.dart';
-
-class ViewerSettings implements JSONable {
+class ViewerSettings {
   static const int minFontSize = 50; // in %
   static const int maxFontSize = 300; // in %
   final SyntheticSpreadMode syntheticSpreadMode;
@@ -47,14 +45,31 @@ class ViewerSettings implements JSONable {
 
   bool get scrollViewDoc => scrollMode == ScrollMode.document;
 
-  @override
-  Map<String, dynamic> toJson() => {
-        "syntheticSpread": _syntheticSpread,
-        "scroll": _scroll,
+  Map<String, dynamic> toJson(ViewerSettings settings) => {
+        "syntheticSpread": settings.syntheticSpreadMode,
+        "scroll": settings.scrollMode.name,
         "enableGPUHardwareAccelerationCSS3D": false,
-        "columnGap": columnGap,
-        "--RS__scroll-snap-stop": scrollSnapShouldStop,
+        "fontSize": settings.fontSize,
+        "columnGap": settings.columnGap,
+        "--RS__scroll-snap-stop": settings.scrollSnapShouldStop,
       };
+
+  factory ViewerSettings.fromJson(Map<String, dynamic> json) => ViewerSettings(
+      json["syntheticSpread"] == "auto"
+          ? SyntheticSpreadMode.auto
+          : json["syntheticSpread"] == "double"
+              ? SyntheticSpreadMode.double
+              : SyntheticSpreadMode.single,
+      json["scroll"] == "auto"
+          ? ScrollMode.auto
+          : json["scroll"] == "scroll-doc"
+              ? ScrollMode.document
+              : json["scroll-continuous"]
+                  ? ScrollMode.continuous
+                  : ScrollMode.continuousHorizontal,
+      json["enableGPUHardwareAccelerationCSS3D"],
+      json["columnGap"],
+      json["--RS__scroll-snap-stop"]);
 
   String get _syntheticSpread {
     String syntheticSpread = "";

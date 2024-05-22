@@ -13,6 +13,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' hide Decoration;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mno_navigator/src/epub/bloc/reader_theme_bloc.dart';
 import 'package:mno_webview/webview.dart';
 import 'package:mno_navigator/epub.dart';
 import 'package:mno_navigator/publication.dart';
@@ -87,11 +88,13 @@ class WebViewScreenState extends State<WebViewScreen> {
         linkPagination: linkPagination);
     _serverBloc = BlocProvider.of<ServerBloc>(context);
     _readerThemeBloc = BlocProvider.of<ReaderThemeBloc>(context);
+    _readerThemeBloc.add(ReaderThemeInitEvent());
     _viewerSettingsBloc = BlocProvider.of<ViewerSettingsBloc>(context);
     _currentSpineItemBloc = BlocProvider.of<CurrentSpineItemBloc>(context);
     webViewHorizontalGestureRecognizer = WebViewHorizontalGestureRecognizer(
         chapNumber: position, link: spineItem, readerContext: readerContext);
-    selectionListener = readerContext.selectionListenerFactory.create(readerContext, context);
+    selectionListener =
+        readerContext.selectionListenerFactory.create(readerContext, context);
     epubCallbacks = EpubCallbacks(
         _spineItemContext,
         _viewerSettingsBloc,
@@ -223,8 +226,6 @@ class WebViewScreenState extends State<WebViewScreen> {
                   })
             ],
           ),
-
-          
           onWebViewCreated: _onWebViewCreated,
         )
       : const SizedBox.shrink();
@@ -261,7 +262,8 @@ class WebViewScreenState extends State<WebViewScreen> {
     Map<String, List<Decoration>> decorators = {
       HtmlDecorationTemplate.highlightGroup: highlights.fold(
           [],
-          (list, highlight) => list..addAll(
+          (list, highlight) => list
+            ..addAll(
                 highlight.toDecorations(isActive: highlight.id == activeId)))
     };
     _jsApi?.registerDecorationTemplates(decorators);

@@ -14,11 +14,9 @@ mixin DatabaseConfig {
     return database;
   }
 
-  static Future<void> init() async =>
-      await _initDatabase(databaseNames);
+  static Future<void> init() async => await _initDatabase(databaseNames);
   static final Map<String, Database> _instances = {};
-  static Future<void> _initDatabase(
-      List<String> nameDB) async {
+  static Future<void> _initDatabase(List<String> nameDB) async {
     for (final name in nameDB) {
       final dbPath = await _generateDBPath(name);
       final dbFactory = databaseFactoryIo;
@@ -29,12 +27,19 @@ mixin DatabaseConfig {
     }
   }
 
-  static List<String> databaseNames = [annotationDatabaseName];
+  static List<String> databaseNames = [
+    annotationDatabaseName,
+    themeDatabaseName,
+    viewSettingDatabaseName
+  ];
   static Future<String> _generateDBPath(String nameDb) async {
     final dir = await getApplicationDocumentsDirectory();
     await dir.create(recursive: true);
     final dbPath = join(dir.path, nameDb);
     return dbPath;
   }
+
   static String get annotationDatabaseName => 'annotations.db';
+  static String get themeDatabaseName => 'theme.db';
+  static String get viewSettingDatabaseName => 'viewSetting.db';
 }

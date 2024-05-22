@@ -103,7 +103,6 @@ class AnnotationsPanelState extends State<AnnotationsPanel> {
 
   void _onTap(ReaderAnnotation readerAnnotation) {
     Navigator.pop(context);
-    widget.readerContext
-        .execute(GoToLocationCommand(readerAnnotation.location));
+    widget.readerContext.execute(GoToLocationCommand(readerAnnotation.location));
   }
 }
