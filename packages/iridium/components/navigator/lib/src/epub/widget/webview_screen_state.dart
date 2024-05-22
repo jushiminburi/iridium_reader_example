@@ -90,6 +90,7 @@ class WebViewScreenState extends State<WebViewScreen> {
     _readerThemeBloc = BlocProvider.of<ReaderThemeBloc>(context);
     _readerThemeBloc.add(ReaderThemeInitEvent());
     _viewerSettingsBloc = BlocProvider.of<ViewerSettingsBloc>(context);
+    _viewerSettingsBloc.add(ViewerSettingInitEvent());
     _currentSpineItemBloc = BlocProvider.of<CurrentSpineItemBloc>(context);
     webViewHorizontalGestureRecognizer = WebViewHorizontalGestureRecognizer(
         chapNumber: position, link: spineItem, readerContext: readerContext);

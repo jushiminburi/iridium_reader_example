@@ -15,7 +15,7 @@ class ReaderThemeBloc extends Bloc<ThemeEvent, ReaderThemeState> {
     ReaderThemeRepository readerThemeRepository = ReaderThemeRepository();
     on<ReaderThemeInitEvent>((event, emit) async {
       final theme = await readerThemeRepository.currenthemeConfig();
-      emit(ReaderThemeState(theme.copy()));
+      emit(ReaderThemeState(theme?.copy() ?? ReaderThemeConfig.defaultTheme));
     });
     on<ReaderThemeEvent>((event, emit) async {
       await readerThemeRepository.saveReaderTheme(event.readerTheme);

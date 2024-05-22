@@ -11,11 +11,10 @@ class ReaderThemeRepository {
   Future<void> saveReaderTheme(ReaderThemeConfig themeConfig) async =>
       await _store.record(0).put(_database, themeConfig.toJson(), merge: true);
 
-  Future<ReaderThemeConfig> currenthemeConfig() async {
+  Future<ReaderThemeConfig?> currenthemeConfig() async {
     final record = await _store.find(_database);
-    return record
-        .map((e) => ReaderThemeConfig.fromJson(e.value))
-        .toList()
-        .first;
+    return record.length == 1
+        ? record.map((e) => ReaderThemeConfig.fromJson(e.value)).toList().first
+        : null;
   }
 }

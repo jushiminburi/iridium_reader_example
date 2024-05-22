@@ -46,9 +46,8 @@ class ViewerSettings {
   bool get scrollViewDoc => scrollMode == ScrollMode.document;
 
   Map<String, dynamic> toJson(ViewerSettings settings) => {
-        "syntheticSpread": settings.syntheticSpreadMode,
+        "syntheticSpread": settings.syntheticSpreadMode.name,
         "scroll": settings.scrollMode.name,
-        "enableGPUHardwareAccelerationCSS3D": false,
         "fontSize": settings.fontSize,
         "columnGap": settings.columnGap,
         "--RS__scroll-snap-stop": settings.scrollSnapShouldStop,
@@ -67,7 +66,7 @@ class ViewerSettings {
               : json["scroll-continuous"]
                   ? ScrollMode.continuous
                   : ScrollMode.continuousHorizontal,
-      json["enableGPUHardwareAccelerationCSS3D"],
+      json["fontSize"],
       json["columnGap"],
       json["--RS__scroll-snap-stop"]);
 
