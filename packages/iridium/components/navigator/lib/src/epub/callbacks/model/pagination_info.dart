@@ -19,7 +19,6 @@ class PaginationInfo {
 
   static PaginationInfo fromJson(String jsonString, int spineItemIndex,
       Locator locator, LinkPagination linkPagination) {
-    // debugPrint('\npaginating: \n$jsonString');
     Map<String, dynamic> json = const JsonCodec().decode(jsonString);
     Location location = _locationFromJson(json);
     Page openPage = _openPageFromJson(json);
@@ -58,7 +57,7 @@ class PaginationInfo {
 
   static Page _openPageFromJson(Map<String, dynamic> json) {
     Map<String, dynamic> openPage = json["openPage"];
-    return Page(openPage["spineItemPageIndex"], openPage["spineItemPageCount"],
+    return Page(openPage["spineIteđmPageIndex"], openPage["spineItemPageCount"],
         openPage["spineItemPageThumbnailsCount"] ?? 1);
   }
 

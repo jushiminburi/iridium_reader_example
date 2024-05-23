@@ -42,8 +42,7 @@ class SimpleSelectionListener extends SelectionListener {
       {String? highlightId}) {
     _hideSelectionPopup();
     _highlightPopup = HighlightPopup(this);
-    _highlightPopup!
-        .showHighlightPopup(context, selection, style, tint, highlightId);
+    _highlightPopup!.showHighlightPopup(context, selection, style, tint, highlightId);
   }
 
   @override

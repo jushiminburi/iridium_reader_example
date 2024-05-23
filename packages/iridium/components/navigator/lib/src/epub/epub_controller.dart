@@ -15,7 +15,7 @@ import 'package:mno_streamer/parser.dart';
 import 'package:preload_page_view/preload_page_view.dart';
 
 class EpubController extends PublicationController {
-  PreloadPageController? _pageController;
+  PageController? _pageController;
 
   EpubController(
       Function onServerClosed,
@@ -40,7 +40,7 @@ class EpubController extends PublicationController {
           displayEditAnnotationIcon,
         );
 
-  PreloadPageController get pageController => _pageController!;
+  PageController get pageController => _pageController!;
 
   /// false if progression is null: we make the assumption that it is ltr
   bool get isReverseOrder =>
@@ -53,7 +53,7 @@ class EpubController extends PublicationController {
   bool get pageControllerAttached => _pageController?.hasClients == true;
 
   @override
-  void initPageController(int initialPage) => _pageController = PreloadPageController(
+  void initPageController(int initialPage) => _pageController = PageController(
       // With Hybrid Composition, on both Android and iOS we must set viewportFraction
       // to < 1.0, in order to get the WebViews to render! Otherwise they do load the data but don't render...
       keepPage: true,
@@ -71,7 +71,7 @@ class EpubController extends PublicationController {
         etc.
       }
      */
-    PreloadPageController? pageController = _pageController;
+    PageController? pageController = _pageController;
     Fimber.d("animated: $animated");
     if (pageController != null) {
       if (animated) {
@@ -99,7 +99,7 @@ class EpubController extends PublicationController {
           etc.
       }
      */
-    PreloadPageController? pageController = _pageController;
+    PageController? pageController = _pageController;
     Fimber.d("animated: $animated");
     if (pageController != null) {
       if (animated) {

@@ -1408,7 +1408,6 @@ function _createHighlight(locations, color, pointerInteraction, type) {
   } else {
     id = "R2_ANNOTATION_" + sha256Hex;
   }
-
   destroyHighlight(id);
 
   const highlight = {

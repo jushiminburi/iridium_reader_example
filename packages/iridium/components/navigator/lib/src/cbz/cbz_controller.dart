@@ -71,6 +71,7 @@ class CbzController extends PublicationController {
         "spineItemPageCount": 1,
       },
     };
+    
     String json = const JsonCodec().encode(data);
     Locator locator = spineItem.toLocator();
     try {

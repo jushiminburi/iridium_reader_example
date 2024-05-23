@@ -13,7 +13,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' hide Decoration;
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mno_navigator/src/epub/bloc/reader_theme_bloc.dart';
 import 'package:mno_webview/webview.dart';
 import 'package:mno_navigator/epub.dart';
 import 'package:mno_navigator/publication.dart';
@@ -112,6 +111,7 @@ class WebViewScreenState extends State<WebViewScreen> {
         selectionListener.displayPopup(selection);
       }
     });
+    
     bookmarkSubscription = readerContext
         .readerAnnotationRepository.bookmarkStream
         .listen((ReaderAnnotation bookmark) {
@@ -121,6 +121,7 @@ class WebViewScreenState extends State<WebViewScreen> {
             ?.let((paginationInfo) => _updateBookmarks(paginationInfo));
       }
     });
+
     deletedAnnotationIdsSubscription = readerContext
         .readerAnnotationRepository.deletedIdsStream
         .listen((List<String> deletedIds) {
@@ -133,6 +134,7 @@ class WebViewScreenState extends State<WebViewScreen> {
             .flatten()
             .toList(),
       });
+
       _spineItemContext.bookmarks
           .removeWhere((annotation) => deletedIds.contains(annotation.id));
       readerContext.paginationInfo
@@ -211,9 +213,12 @@ class WebViewScreenState extends State<WebViewScreen> {
                 () => webViewHorizontalGestureRecognizer),
             Factory<LongPressGestureRecognizer>(
                 () => LongPressGestureRecognizer()),
-          },
-          contextMenu: ContextMenu(
-            menuItems: [
+          }, contextMenu: _contextMenu, onWebViewCreated: _onWebViewCreated,
+        )
+      : const SizedBox.shrink();
+
+  ContextMenu get _contextMenu => ContextMenu(
+     menuItems: [
               ContextMenuItem(
                   id: 0,
                   title: "Chú thích",
@@ -226,10 +231,7 @@ class WebViewScreenState extends State<WebViewScreen> {
                     });
                   })
             ],
-          ),
-          onWebViewCreated: _onWebViewCreated,
-        )
-      : const SizedBox.shrink();
+  );
 
   void _onPageFinished(InAppWebViewController controller, Uri? url) async {
     // Fimber.d("_onPageFinished[$position]: $url");

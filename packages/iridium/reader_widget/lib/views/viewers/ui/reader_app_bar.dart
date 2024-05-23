@@ -34,12 +34,14 @@ class ReaderAppBarState extends State<ReaderAppBar> {
   final GlobalKey _settingsKey = GlobalKey();
   late StreamSubscription<bool> _streamSubscription;
   double opacity = 0.0;
-
+  late ReaderThemeBloc _readerThemeBloc;
   ReaderContext get readerContext => widget.readerContext;
 
   @override
   void initState() {
     super.initState();
+    _readerThemeBloc = BlocProvider.of<ReaderThemeBloc>(context);
+    _readerThemeBloc.add(ReaderThemeInitEvent());
     _streamSubscription = widget.readerContext.toolbarStream.listen((visible) {
       setState(() {
         opacity = (visible) ? 1.0 : 0.0;
@@ -54,32 +56,38 @@ class ReaderAppBarState extends State<ReaderAppBar> {
   }
 
   @override
-  Widget build(BuildContext context) => SafeArea(
-        child: IgnorePointer(
-            ignoring: opacity < 1.0,
-            child: AnimatedOpacity(
-                opacity: opacity,
-                duration: const Duration(milliseconds: 300),
-                child: SizedBox(
-                    height: height,
-                    child: AppBar(backgroundColor: Colors.white, actions: [
-                      IconButton(
-                          onPressed: _onBookmarkPressed,
-                          icon: const ImageIcon(AssetImage(
-                              'packages/iridium_reader_widget/assets/images/icon_search.png'))),
-                      IconButton(
-                          onPressed: _onBookmarkPressed,
-                          icon: const ImageIcon(AssetImage(
-                              'packages/iridium_reader_widget/assets/images/icon_bookmark.png'))),
-                      IconButton(
-                          key: _settingsKey,
-                          // onPressed: _onSettingsPressed,
-                          onPressed: showBottomModalDialog,
-                          icon: const ImageIcon(AssetImage(
-                              'packages/iridium_reader_widget/assets/images/icon_settings.png'))),
-                      _onMenuPressed(),
-                    ])))),
-      );
+  Widget build(BuildContext context) =>
+      BlocBuilder<ReaderThemeBloc, ReaderThemeState>(
+          bloc: _readerThemeBloc,
+          builder: (context, ReaderThemeState state) => SafeArea(
+                child: IgnorePointer(
+                    ignoring: opacity < 1.0,
+                    child: AnimatedOpacity(
+                        opacity: opacity,
+                        duration: const Duration(milliseconds: 300),
+                        child: SizedBox(
+                            height: height,
+                            child: AppBar(
+                                backgroundColor:
+                                    state.readerTheme.backgroundColor,
+                                actions: [
+                                  IconButton(
+                                      onPressed: _onBookmarkPressed,
+                                      icon: const ImageIcon(AssetImage(
+                                          'packages/iridium_reader_widget/assets/images/icon_search.png'))),
+                                  IconButton(
+                                      onPressed: _onBookmarkPressed,
+                                      icon: const ImageIcon(AssetImage(
+                                          'packages/iridium_reader_widget/assets/images/icon_bookmark.png'))),
+                                  IconButton(
+                                      key: _settingsKey,
+                                      // onPressed: _onSettingsPressed,
+                                      onPressed: showBottomModalDialog,
+                                      icon: const ImageIcon(AssetImage(
+                                          'packages/iridium_reader_widget/assets/images/icon_settings.png'))),
+                                  _onMenuPressed(),
+                                ])))),
+              ));
 
   void _onBookmarkPressed() {
     readerContext.toggleBookmark();

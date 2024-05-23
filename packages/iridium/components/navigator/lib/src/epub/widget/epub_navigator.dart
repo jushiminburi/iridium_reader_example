@@ -8,7 +8,6 @@ import 'package:mno_navigator/epub.dart';
 import 'package:mno_navigator/publication.dart';
 import 'package:mno_server/mno_server.dart';
 import 'package:mno_shared/publication.dart';
-import 'package:preload_page_view/preload_page_view.dart';
 import 'package:universal_io/io.dart' hide Link;
 
 class EpubNavigator extends PublicationNavigator {
@@ -53,10 +52,10 @@ class EpubNavigatorState extends PublicationNavigatorState<EpubNavigator> {
 
   @override
   Widget buildReaderView(List<Link> spine, ServerStarted serverState) =>
-      PreloadPageView.builder(
+      PageView.builder(
         controller: epubController.pageController,
         scrollDirection: Axis.horizontal,
-        preloadPagesCount: 1,
+        // preloadPagesCount: 1,
         onPageChanged: epubController.onPageChanged,
         physics: const AlwaysScrollableScrollPhysics(),
         reverse: readerContext?.readingProgression?.isReverseOrder() ?? false,

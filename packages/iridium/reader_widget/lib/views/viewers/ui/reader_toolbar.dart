@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_xlider/flutter_xlider.dart';
 import 'package:iridium_reader_widget/views/viewers/ui/toolbar_button.dart';
 import 'package:iridium_reader_widget/views/viewers/ui/toolbar_page_number.dart';
@@ -28,7 +29,7 @@ class ReaderToolbarState extends State<ReaderToolbar> {
   late StreamSubscription<PaginationInfo> _currentLocationStreamSubscription;
   late StreamController<int> pageNumberController;
   double opacity = 0.0;
-
+  late ReaderThemeBloc _readerThemeBloc;
   ReaderContext get readerContext => widget.readerContext;
 
   Function() get onSkipLeft => widget.onSkipLeft;
@@ -38,6 +39,8 @@ class ReaderToolbarState extends State<ReaderToolbar> {
   @override
   void initState() {
     super.initState();
+    _readerThemeBloc = BlocProvider.of<ReaderThemeBloc>(context);
+    _readerThemeBloc.add(ReaderThemeInitEvent());
     _toolbarStreamSubscription = readerContext.toolbarStream.listen((visible) {
       setState(() {
         opacity = (visible) ? 1.0 : 0.0;
@@ -58,21 +61,24 @@ class ReaderToolbarState extends State<ReaderToolbar> {
   }
 
   @override
-  Widget build(BuildContext context) => SafeArea(
-        child: IgnorePointer(
-          ignoring: opacity < 1.0,
-          child: AnimatedOpacity(
-            opacity: opacity,
-            duration: const Duration(milliseconds: 300),
-            child: Container(
-              height: height,
-              color: Theme.of(context).colorScheme.primaryContainer,
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: _firstRow(context),
-            ),
-          ),
-        ),
-      );
+  Widget build(BuildContext context) =>
+      BlocBuilder<ReaderThemeBloc, ReaderThemeState>(
+          bloc: _readerThemeBloc,
+          builder: (context, state) => SafeArea(
+                child: IgnorePointer(
+                  ignoring: opacity < 1.0,
+                  child: AnimatedOpacity(
+                    opacity: opacity,
+                    duration: const Duration(milliseconds: 300),
+                    child: Container(
+                      height: height,
+                      color: state.readerTheme.backgroundColor,
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: _firstRow(context),
+                    ),
+                  ),
+                ),
+              ));
 
   Widget _firstRow(BuildContext context) {
     var isReversed =

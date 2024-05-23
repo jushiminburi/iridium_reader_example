@@ -36,8 +36,7 @@ abstract class SelectionListener {
                 highlight.style = style ?? HighlightStyle.highlight;
                 highlight.tint = color.value;
                 if (annotation != null) {
-                  highlight.annotation = annotation;
-                }
+                  highlight.annotation = annotation; }
                 readerAnnotationRepository.save(highlight);
                 jsApi?.updateDecorations({
                   HtmlDecorationTemplate.highlightGroup:

@@ -43,10 +43,7 @@ class HighlightPopup extends SelectionPopup {
                         } else {
                           selectionListener.createHighlight(
                               selection, style, color);
-                        }
-                        close();
-                      }))
-                  .toList(),
+                        } close(); })).toList(),
               buildNoteOption(context, selection, highlightId),
               if (highlightId != null) buildDeleteOption(context, highlightId),
             ],
