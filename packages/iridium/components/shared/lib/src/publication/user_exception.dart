@@ -19,6 +19,7 @@ class UserException implements Exception {
   /// @param includesCauses Includes nested [UserException] causes in the user message when true.
   String getUserMessage(LocalizationsRepository localizationsRepository,
       {bool includesCauses = true}) {
+        
     // Convert complex objects to strings, such as Date, to be interpolated.
     List<Object> sanitizedArgs = args.map((arg) {
       if (arg is DateTime) {

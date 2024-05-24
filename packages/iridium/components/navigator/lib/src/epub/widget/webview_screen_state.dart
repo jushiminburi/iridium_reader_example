@@ -23,6 +23,7 @@ import 'package:mno_navigator/src/epub/model/decoration_style_annotation_mark.da
 import 'package:mno_navigator/src/publication/model/annotation_type_and_idref_predicate.dart';
 import 'package:mno_server/mno_server.dart';
 import 'package:mno_shared/publication.dart';
+import 'package:openpgp/openpgp.dart';
 
 @protected
 class WebViewScreenState extends State<WebViewScreen> {
@@ -111,7 +112,7 @@ class WebViewScreenState extends State<WebViewScreen> {
         selectionListener.displayPopup(selection);
       }
     });
-    
+
     bookmarkSubscription = readerContext
         .readerAnnotationRepository.bookmarkStream
         .listen((ReaderAnnotation bookmark) {
@@ -169,69 +170,75 @@ class WebViewScreenState extends State<WebViewScreen> {
         child: buildWebViewComponent(spineItem),
       );
 
-  Widget buildWebViewComponent(Link link) => isLoaded
-      ? InAppWebView(
-          key: _webViewKey,
-          initialUrlRequest: URLRequest(
-              url: WebUri('${widget.address}/${link.href.removePrefix("/")}')),
-          initialOptions: InAppWebViewGroupOptions(
-            android: AndroidInAppWebViewOptions(
-                useHybridComposition: true,
-                useShouldInterceptRequest: true,
-                safeBrowsingEnabled: false,
-                cacheMode: AndroidCacheMode.LOAD_NO_CACHE,
-                disabledActionModeMenuItems:
-                    AndroidActionModeMenuItem.MENU_ITEM_SHARE |
-                        AndroidActionModeMenuItem.MENU_ITEM_WEB_SEARCH |
-                        AndroidActionModeMenuItem.MENU_ITEM_PROCESS_TEXT),
-            crossPlatform: InAppWebViewOptions(
-              useShouldOverrideUrlLoading: true,
-              verticalScrollBarEnabled: false,
-              horizontalScrollBarEnabled: false,
+  Widget buildWebViewComponent(Link link) {
+    String decodeUri =
+        Uri.decodeFull('${widget.address}/${link.href.removePrefix("/")}');
+    return isLoaded
+        ? InAppWebView(
+            key: _webViewKey,
+            initialUrlRequest: URLRequest(
+                url:
+                    WebUri('${widget.address}/${link.href.removePrefix("/")}')),
+            initialOptions: InAppWebViewGroupOptions(
+              android: AndroidInAppWebViewOptions(
+                  useHybridComposition: true,
+                  useShouldInterceptRequest: true,
+                  safeBrowsingEnabled: false,
+                  cacheMode: AndroidCacheMode.LOAD_NO_CACHE,
+                  disabledActionModeMenuItems:
+                      AndroidActionModeMenuItem.MENU_ITEM_SHARE |
+                          AndroidActionModeMenuItem.MENU_ITEM_WEB_SEARCH |
+                          AndroidActionModeMenuItem.MENU_ITEM_PROCESS_TEXT),
+              crossPlatform: InAppWebViewOptions(
+                  useShouldOverrideUrlLoading: true,
+                  verticalScrollBarEnabled: false,
+                  horizontalScrollBarEnabled: false),
             ),
-          ),
-          onConsoleMessage: (InAppWebViewController controller,
-              ConsoleMessage consoleMessage) {
-            Fimber.d(
-                "WebView[${consoleMessage.messageLevel}]: ${consoleMessage.message}");
-          },
-          androidShouldInterceptRequest: (InAppWebViewController controller,
-              WebResourceRequest request) async {
-            if (!_serverBloc.startHttpServer &&
-                request.url.toString().startsWith(_serverBloc.address)) {
-              _serverBloc
-                  .onRequest(AndroidRequest(request))
-                  .then((androidResponse) => androidResponse.response);
-            }
-            return null;
-          },
-          shouldOverrideUrlLoading: (controller, navigationAction) async =>
-              NavigationActionPolicy.ALLOW,
-          onLoadStop: _onPageFinished,
-          gestureRecognizers: {
-            Factory<WebViewHorizontalGestureRecognizer>(
-                () => webViewHorizontalGestureRecognizer),
-            Factory<LongPressGestureRecognizer>(
-                () => LongPressGestureRecognizer()),
-          }, contextMenu: _contextMenu, onWebViewCreated: _onWebViewCreated,
-        )
-      : const SizedBox.shrink();
+            onConsoleMessage: (InAppWebViewController controller,
+                ConsoleMessage consoleMessage) {
+              Fimber.d(
+                  "WebView[${consoleMessage.messageLevel}]: ${consoleMessage.message}");
+            },
+            androidShouldInterceptRequest: (InAppWebViewController controller,
+                WebResourceRequest request) async {
+              if (!_serverBloc.startHttpServer &&
+                  request.url.toString().startsWith(_serverBloc.address)) {
+                _serverBloc
+                    .onRequest(AndroidRequest(request))
+                    .then((androidResponse) => androidResponse.response);
+              }
+              return null;
+            },
+            shouldOverrideUrlLoading: (controller, navigationAction) async =>
+                NavigationActionPolicy.ALLOW,
+            onLoadStop: _onPageFinished,
+            gestureRecognizers: {
+              Factory<WebViewHorizontalGestureRecognizer>(
+                  () => webViewHorizontalGestureRecognizer),
+              Factory<LongPressGestureRecognizer>(
+                  () => LongPressGestureRecognizer()),
+            },
+            contextMenu: _contextMenu,
+            onWebViewCreated: _onWebViewCreated,
+          )
+        : const SizedBox.shrink();
+  }
 
   ContextMenu get _contextMenu => ContextMenu(
-     menuItems: [
-              ContextMenuItem(
-                  id: 0,
-                  title: "Chú thích",
-                  action: () async {
-                    _jsApi?.let((jsApi) async {
-                      Selection? selection =
-                          await jsApi.getCurrentSelection(currentLocator);
-                      selection?.offset = webViewOffset();
-                      selectionController.add(selection);
-                    });
-                  })
-            ],
-  );
+        menuItems: [
+          ContextMenuItem(
+              id: 0,
+              title: "Chú thích",
+              action: () async {
+                _jsApi?.let((jsApi) async {
+                  Selection? selection =
+                      await jsApi.getCurrentSelection(currentLocator);
+                  selection?.offset = webViewOffset();
+                  selectionController.add(selection);
+                });
+              })
+        ],
+      );
 
   void _onPageFinished(InAppWebViewController controller, Uri? url) async {
     // Fimber.d("_onPageFinished[$position]: $url");

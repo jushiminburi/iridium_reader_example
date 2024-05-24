@@ -23,6 +23,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final GlobalKey webViewKey = GlobalKey();
+
   @override
   void initState() {
     super.initState();
@@ -31,6 +32,6 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     // return EpubScreen.fromPath(filePath: '/Users/duonghoang/Desktop/iridium_reader_example/assets/images/toc_sub_toc.epub');
-    return EpubScreen.fromPath( filePath: '/Users/vhmt/Desktop/iridium_reader_example/assets/images/toc_sub_toc.epub');
+    return EpubScreen.fromPath( filePath: '/Users/vhmt/Desktop/example.epub');
   }
 }

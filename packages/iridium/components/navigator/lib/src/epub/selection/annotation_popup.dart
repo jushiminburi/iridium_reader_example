@@ -20,14 +20,13 @@ class AnnotationPopup extends StatefulWidget {
   );
 
   static void showAnnotationPopup(
-    BuildContext context,
-    SelectionListener selectionListener,
-    Selection selection,
-    HighlightStyle style,
-    Color tint,
-    String? annotation,
-    String? highlightId,
-  ) {
+      BuildContext context,
+      SelectionListener selectionListener,
+      Selection selection,
+      HighlightStyle style,
+      Color tint,
+      String? annotation,
+      String? highlightId) {
     showDialog(
       context: context,
       builder: (context) => AnnotationPopup(
