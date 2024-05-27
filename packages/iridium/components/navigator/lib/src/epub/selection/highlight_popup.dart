@@ -5,11 +5,11 @@ import 'package:mno_navigator/src/epub/selection/selection_popup.dart';
 
 class HighlightPopup extends SelectionPopup {
   static const List<Color> highlightTints = [
-    Color.fromARGB(255, 249, 239, 125),
-    Color.fromARGB(255, 173, 247, 123),
-    Color.fromARGB(255, 124, 198, 247),
-    Color.fromARGB(255, 247, 124, 124),
-    Color.fromARGB(255, 182, 153, 255),
+    Color(4294569853),
+    Color(4289591163),
+    Color(4286367479),
+    Color(4294409340),
+    Color(4290157055),
   ];
 
   HighlightPopup(super.selectionListener);
@@ -43,7 +43,10 @@ class HighlightPopup extends SelectionPopup {
                         } else {
                           selectionListener.createHighlight(
                               selection, style, color);
-                        } close(); })).toList(),
+                        }
+                        close();
+                      }))
+                  .toList(),
               buildNoteOption(context, selection, highlightId),
               if (highlightId != null) buildDeleteOption(context, highlightId),
             ],
@@ -51,11 +54,12 @@ class HighlightPopup extends SelectionPopup {
         ));
   }
 
-  Widget buildColorOption(Color color, VoidCallback action) => IconButton(
-        onPressed: action,
-        icon: Container(
-          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-        ),
+  Widget buildColorOption(Color color, void Function() action) =>
+      GestureDetector(
+        onTap: action,
+        child: Container(
+            width: 30,
+            decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
       );
 
   Widget buildNoteOption(

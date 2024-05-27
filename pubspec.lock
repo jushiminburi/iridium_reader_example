@@ -137,6 +137,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.6"
+  flat_buffers:
+    dependency: transitive
+    description:
+      name: flat_buffers
+      sha256: "23e2ced0d8e8ecdffbd9f267f49a668c74438393b9acaeac1c724123e3764263"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.5"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -425,6 +433,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  openpgp:
+    dependency: transitive
+    description:
+      name: openpgp
+      sha256: "9df1fca8fd8b71b69226d2a0871b6307e51846a4b41d4897bb715dc8ca04a959"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.8.0"
   path:
     dependency: transitive
     description:

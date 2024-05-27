@@ -23,7 +23,6 @@ class DecorationChangeAdded extends DecorationChange {
 
 class DecorationChangeUpdated extends DecorationChange {
   final Decoration decoration;
-
   DecorationChangeUpdated._(this.decoration);
 }
 

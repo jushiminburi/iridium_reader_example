@@ -68,44 +68,42 @@ class AnnotationPopupState extends State<AnnotationPopup> {
 
   @override
   Widget build(BuildContext context) => AlertDialog(
-        title: Text("Note"),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              alignment: Alignment.centerLeft,
-              decoration: BoxDecoration(
-                border: Border(
-                  left: BorderSide(color: tint, width: borderWidth),
+          title: Text("Note"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                alignment: Alignment.centerLeft,
+                decoration: BoxDecoration(
+                  border: Border(
+                    left: BorderSide(color: tint, width: borderWidth),
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: borderWidth),
+                  child: Text(selection.locator.text.highlight ?? ""),
                 ),
               ),
-              child: Padding(
-                padding: const EdgeInsets.only(left: borderWidth),
-                child: Text(selection.locator.text.highlight ?? ""),
+              TextField(
+                controller: _controller,
+                onSubmitted: (value) => saveHighlight(value),
               ),
-            ),
-            TextField(
-              controller: _controller,
-              onSubmitted: (value) => saveHighlight(value),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text("Cancel"),
+            ],
           ),
-          TextButton(
-            onPressed: () {
-              saveHighlight(_controller.text);
-              Navigator.pop(context);
-            },
-            child: Text("Save"),
-          ),
-        ],
-      );
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text("Cancel"),
+            ),
+            TextButton(
+                onPressed: () {
+                  saveHighlight(_controller.text);
+                  Navigator.pop(context);
+                },
+                child: Text("Save"))
+          ]);
 
   void saveHighlight(String text) {
     String? id = highlightId;
