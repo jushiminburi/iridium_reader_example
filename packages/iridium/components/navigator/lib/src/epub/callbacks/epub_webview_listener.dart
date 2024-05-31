@@ -86,6 +86,9 @@ class EpubWebViewListener extends WebViewListener {
     return true;
   }
 
+
+  
+
   @override
   void onProgressionChanged() {}
 

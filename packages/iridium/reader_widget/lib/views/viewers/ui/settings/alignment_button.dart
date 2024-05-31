@@ -4,7 +4,7 @@ import 'package:mno_navigator/epub.dart';
 class AlignmentButton extends StatelessWidget {
   final ReaderThemeBloc readerThemeBloc;
   final ReaderThemeConfig readerTheme;
-  final TextAlign textAlign;
+  final TextAligns textAlign;
 
   const AlignmentButton({
     super.key,

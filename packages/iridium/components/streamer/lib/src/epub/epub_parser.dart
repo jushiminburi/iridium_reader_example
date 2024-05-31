@@ -238,6 +238,6 @@ extension PublicationLayoutStyle on Publication {
 
 extension _FetcherProtectedWithLcp on Fetcher {
   Future<bool> isProtectedWithLcp() async =>
-      await getWithHref("/META-INF/license.lcpl")
+      await getWithHref("/META-INF/license.lcp")
           .use((it) async => (await it.length()).isSuccess);
 }

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PGP Decryption</title>
+  <script src="https://cdn.jsdelivr.net/npm/openpgp@5.9.0/dist/openpgp.min.js"></script>
+</head>
+<body>
+  <input type="file" id="fileInput" />
+  <button id="decryptButton">Decrypt</button>
+  <pre id="decryptedContent"></pre>
+
+  <script>
+    document.getElementById('decryptButton').addEventListener('click', async () => {
+      const fileInput = document.getElementById('fileInput');
+      if (fileInput.files.length === 0) {
+        alert('Please select a file first.');
+        return;
+      }
+
+      const file = fileInput.files[0];
+      const reader = new FileReader();
+      reader.onload = async (event) => {
+        const encryptedMessage = event.target.result;
+
+        // Your PGP private key
+        const privateKeyArmored = `
+        -----BEGIN PGP PRIVATE KEY BLOCK----- lQHqBGY94gEBBADP0dzs1/xTGK3VlOJ5q/jpOJUjkwmsV/v3hG+iacRys+KVJVlA  WvPV9LRV07s3haY1BYGB3hI/7SuX4XwE6crtDnymQeWnQhMFcwQY5ditEoOBK1Pw  H6hdQ9xqDUjgO7+eWoLRvjbYLZ4AuFnktPXdIlw04qN+3e7B1pMHg24OhwAFE/8C  AwI+5tFEWbQ0MmBAkaU1w1pJGOKqEw8tlkyIHgbjngNFkfc9m4lsUT26XQqIrPzb  UrhbD+yzUAYmb/647B/pmGN9ub4TIA5Lb1Tsw/zTaBST+xXID52mgFggNQ2HvRVO  0MQfXS0/R3jnUYCCZtrIUpSsSz155+li+zJ6kGCkoJnkFWIspvaweDKkpGijbAzc  1oAwnuAxRkojhdv52tT9x3eJGSNubLQDlgrFSoc/RBnAJ0KXly2hxoB+hjnBThZV  Yr1W8jjHVny0HyjrIHoUjO1lsNdDKFkq78IyxpBMu5J9EHI4hTKbS7iTSEW5n70c  f7Vn7BrrAE8ELV2niPR4syZ6KarsnW+p1Kc0p9RMJwDnWAAlDpoZ8r8vIDVF1OPM  WBWge1RaXxYhX/OI/x0+JrHwEL+KbVOQ4cc1B2HbliVN7uvY6s8f3coS/hZo+oe2  kF3raa1ECbQyjZaiV7QEdmhtdIicBBABAgAGBQJmPeIBAAoJEJxBjfuRnQjnL/ID  /1Plf1jGVGXHKa6HompzQCfQn+M4+FYjyTV5RuZSR2iWF9etSmETJWxUVOZTzyx7  urCPwYR+kzIy7yC0qv09WcwOpVzICy/plGdiX7QJqhOdXghGGGWx7Nm9zY1sPzhe  XEfQkH9wTIGsx8uzG+85HmFRJTvKbdWx+6lSrtEpPenq  =cN1P  -----END PGP PRIVATE KEY BLOCK-----
+        `;
+        const passphrase = '2022@vhmt.vn';
+
+        try {
+          const privateKey = await openpgp.decryptKey({
+            privateKey: await openpgp.readKey({ armoredKey: privateKeyArmored }),
+            passphrase
+          });
+
+          const message = await openpgp.readMessage({
+            armoredMessage: encryptedMessage
+          });
+
+          const { data: decrypted } = await openpgp.decrypt({
+            message,
+            decryptionKeys: privateKey
+          });
+
+          document.getElementById('decryptedContent').innerText = decrypted;
+        } catch (error) {
+          console.error('Decryption failed:', error);
+          alert('Decryption failed. Check the console for more details.');
+        }
+      };
+      reader.readAsText(file);
+    });
+  </script>
+</body>
+</html>

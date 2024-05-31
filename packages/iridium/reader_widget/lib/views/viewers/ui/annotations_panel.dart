@@ -48,15 +48,34 @@ class AnnotationsPanelState extends State<AnnotationsPanel> {
                     .where((e) => e.annotationType == AnnotationType.bookmark)
                     .toList();
               }
-              return ListView.separated(
-                itemCount: readerAnnotations.length,
-                itemBuilder: (context, index) => _annotationType ==
-                        AnnotationType.bookmark
-                    ? itemBuilderBookmark(context, readerAnnotations[index])
-                    : itemBuilderHighlight(context, readerAnnotations[index]),
-                separatorBuilder: (BuildContext context, int index) =>
-                    const Divider(color: Color(0xffE0E0E0)),
-              );
+              return Column(children: [
+                Container(
+                  height: 50,
+                  decoration: const BoxDecoration(
+                      border:
+                          Border(bottom: BorderSide(color: Color(0xffE0E0E0)))),
+                  child: const Text(
+                    'Dấu trang',
+                    style: TextStyle(
+                        fontStyle: ,
+                        fontSize: 22,
+                        decoration: TextDecoration.none,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ),
+                Expanded(
+                  child: ListView.separated(
+                    itemCount: readerAnnotations.length,
+                    itemBuilder: (context, index) => _annotationType ==
+                            AnnotationType.bookmark
+                        ? itemBuilderBookmark(context, readerAnnotations[index])
+                        : itemBuilderHighlight(
+                            context, readerAnnotations[index]),
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const Divider(color: Color(0xffE0E0E0)),
+                  ),
+                ),
+              ]);
             }),
       );
 
@@ -66,13 +85,14 @@ class AnnotationsPanelState extends State<AnnotationsPanel> {
     String? title =
         (locator?.title?.isNotEmpty == true) ? locator?.title : null;
     String? text = locator?.text.highlight;
+    String? progression =
+        ((locator?.locations.progression ?? 0) * 100).toStringAsFixed(2);
     return Material(
-      color: const Color(0xffF8F8F8),
-      child: ListTile(
-        title: Text(title ?? text ?? ""),
-        onTap: () => _onTap(readerAnnotation),
-      ),
-    );
+        color: const Color(0xffF8F8F8),
+        child: ListTile(
+            title: Text(title ?? text ?? ""),
+            subtitle: Text("$progression%", textAlign: TextAlign.right),
+            onTap: () => _onTap(readerAnnotation)));
   }
 
   Widget itemBuilderHighlight(
@@ -103,6 +123,7 @@ class AnnotationsPanelState extends State<AnnotationsPanel> {
 
   void _onTap(ReaderAnnotation readerAnnotation) {
     Navigator.pop(context);
-    widget.readerContext.execute(GoToLocationCommand(readerAnnotation.location));
+    widget.readerContext
+        .execute(GoToLocationCommand(readerAnnotation.location));
   }
 }

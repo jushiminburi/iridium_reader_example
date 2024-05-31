@@ -14,8 +14,7 @@ class ContentPanel extends StatefulWidget {
 class ContentPanelState extends State<ContentPanel> {
   @override
   Widget build(BuildContext context) => Column(
-        children: [_buildTitleContentPanel(), _buildListItemTableOfContents()],
-      );
+        children: [_buildTitleContentPanel(), _buildListItemTableOfContents()]);
   Widget _buildListItemTableOfContents() {
     final tableOfContents = _flattenList(widget.readerContext.tableOfContents);
     return Expanded(

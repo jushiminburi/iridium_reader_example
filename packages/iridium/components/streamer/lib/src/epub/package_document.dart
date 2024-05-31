@@ -146,8 +146,8 @@ class Itemref {
   static Itemref? parse(XmlNode element, Map<String, String> prefixMap) {
     String? idref = element.getAttribute("idref");
     if (idref == null) {
-      return null;
-    }
+      return null;}
+
     bool notLinear = element.getAttribute("linear") == "no";
     String propAttr = element.getAttribute("properties") ?? "";
     List<String> properties = parseProperties(propAttr)

@@ -23,7 +23,6 @@ import 'package:mno_navigator/src/epub/model/decoration_style_annotation_mark.da
 import 'package:mno_navigator/src/publication/model/annotation_type_and_idref_predicate.dart';
 import 'package:mno_server/mno_server.dart';
 import 'package:mno_shared/publication.dart';
-import 'package:openpgp/openpgp.dart';
 
 @protected
 class WebViewScreenState extends State<WebViewScreen> {
@@ -162,6 +161,11 @@ class WebViewScreenState extends State<WebViewScreen> {
     selectionListener.hidePopup();
   }
 
+  final String privateKey = '''
+-----BEGIN PGP PRIVATE KEY BLOCK-----  Version: BCPG C# v1.9.0.0    lQHqBGY94gEBBADP0dzs1/xTGK3VlOJ5q/jpOJUjkwmsV/v3hG+iacRys+KVJVlA  WvPV9LRV07s3haY1BYGB3hI/7SuX4XwE6crtDnymQeWnQhMFcwQY5ditEoOBK1Pw  H6hdQ9xqDUjgO7+eWoLRvjbYLZ4AuFnktPXdIlw04qN+3e7B1pMHg24OhwAFE/8C  AwI+5tFEWbQ0MmBAkaU1w1pJGOKqEw8tlkyIHgbjngNFkfc9m4lsUT26XQqIrPzb  UrhbD+yzUAYmb/647B/pmGN9ub4TIA5Lb1Tsw/zTaBST+xXID52mgFggNQ2HvRVO  0MQfXS0/R3jnUYCCZtrIUpSsSz155+li+zJ6kGCkoJnkFWIspvaweDKkpGijbAzc  1oAwnuAxRkojhdv52tT9x3eJGSNubLQDlgrFSoc/RBnAJ0KXly2hxoB+hjnBThZV  Yr1W8jjHVny0HyjrIHoUjO1lsNdDKFkq78IyxpBMu5J9EHI4hTKbS7iTSEW5n70c  f7Vn7BrrAE8ELV2niPR4syZ6KarsnW+p1Kc0p9RMJwDnWAAlDpoZ8r8vIDVF1OPM  WBWge1RaXxYhX/OI/x0+JrHwEL+KbVOQ4cc1B2HbliVN7uvY6s8f3coS/hZo+oe2  kF3raa1ECbQyjZaiV7QEdmhtdIicBBABAgAGBQJmPeIBAAoJEJxBjfuRnQjnL/ID  /1Plf1jGVGXHKa6HompzQCfQn+M4+FYjyTV5RuZSR2iWF9etSmETJWxUVOZTzyx7  urCPwYR+kzIy7yC0qv09WcwOpVzICy/plGdiX7QJqhOdXghGGGWx7Nm9zY1sPzhe  XEfQkH9wTIGsx8uzG+85HmFRJTvKbdWx+6lSrtEpPenq  =cN1P  -----END PGP PRIVATE KEY BLOCK-----
+  ''';
+  final String passphrase = '2022@vhmt.vn';
+
   @override
   Widget build(BuildContext context) => buildWebView();
 
@@ -170,59 +174,55 @@ class WebViewScreenState extends State<WebViewScreen> {
         child: buildWebViewComponent(spineItem),
       );
 
-  Widget buildWebViewComponent(Link link) {
-    String decodeUri =
-        Uri.decodeFull('${widget.address}/${link.href.removePrefix("/")}');
-    return isLoaded
-        ? InAppWebView(
-            key: _webViewKey,
-            initialUrlRequest: URLRequest(
-                url:
-                    WebUri('${widget.address}/${link.href.removePrefix("/")}')),
-            initialOptions: InAppWebViewGroupOptions(
-              android: AndroidInAppWebViewOptions(
-                  useHybridComposition: true,
-                  useShouldInterceptRequest: true,
-                  safeBrowsingEnabled: false,
-                  cacheMode: AndroidCacheMode.LOAD_NO_CACHE,
-                  disabledActionModeMenuItems:
-                      AndroidActionModeMenuItem.MENU_ITEM_SHARE |
-                          AndroidActionModeMenuItem.MENU_ITEM_WEB_SEARCH |
-                          AndroidActionModeMenuItem.MENU_ITEM_PROCESS_TEXT),
-              crossPlatform: InAppWebViewOptions(
-                  useShouldOverrideUrlLoading: true,
-                  verticalScrollBarEnabled: false,
-                  horizontalScrollBarEnabled: false),
-            ),
-            onConsoleMessage: (InAppWebViewController controller,
-                ConsoleMessage consoleMessage) {
-              Fimber.d(
-                  "WebView[${consoleMessage.messageLevel}]: ${consoleMessage.message}");
-            },
-            androidShouldInterceptRequest: (InAppWebViewController controller,
-                WebResourceRequest request) async {
-              if (!_serverBloc.startHttpServer &&
-                  request.url.toString().startsWith(_serverBloc.address)) {
-                _serverBloc
-                    .onRequest(AndroidRequest(request))
-                    .then((androidResponse) => androidResponse.response);
-              }
-              return null;
-            },
-            shouldOverrideUrlLoading: (controller, navigationAction) async =>
-                NavigationActionPolicy.ALLOW,
-            onLoadStop: _onPageFinished,
-            gestureRecognizers: {
-              Factory<WebViewHorizontalGestureRecognizer>(
-                  () => webViewHorizontalGestureRecognizer),
-              Factory<LongPressGestureRecognizer>(
-                  () => LongPressGestureRecognizer()),
-            },
-            contextMenu: _contextMenu,
-            onWebViewCreated: _onWebViewCreated,
-          )
-        : const SizedBox.shrink();
-  }
+  Widget buildWebViewComponent(Link link) => isLoaded
+      ? InAppWebView(
+          key: _webViewKey,
+          initialUrlRequest: URLRequest(
+              url: WebUri('${widget.address}/${link.href.removePrefix("/")}')),
+          initialOptions: InAppWebViewGroupOptions(
+            android: AndroidInAppWebViewOptions(
+                useHybridComposition: true,
+                useShouldInterceptRequest: true,
+                safeBrowsingEnabled: false,
+                cacheMode: AndroidCacheMode.LOAD_NO_CACHE,
+                disabledActionModeMenuItems:
+                    AndroidActionModeMenuItem.MENU_ITEM_SHARE |
+                        AndroidActionModeMenuItem.MENU_ITEM_WEB_SEARCH |
+                        AndroidActionModeMenuItem.MENU_ITEM_PROCESS_TEXT),
+            crossPlatform: InAppWebViewOptions(
+                useShouldOverrideUrlLoading: true,
+                verticalScrollBarEnabled: false,
+                horizontalScrollBarEnabled: false),
+          ),
+          onLoadStart: (controller, url) {},
+          onConsoleMessage: (InAppWebViewController controller,
+              ConsoleMessage consoleMessage) {
+            Fimber.d(
+                "WebView[${consoleMessage.messageLevel}]: ${consoleMessage.message}");
+          },
+          androidShouldInterceptRequest: (InAppWebViewController controller,
+              WebResourceRequest request) async {
+            if (!_serverBloc.startHttpServer &&
+                request.url.toString().startsWith(_serverBloc.address)) {
+              _serverBloc
+                  .onRequest(AndroidRequest(request))
+                  .then((androidResponse) => androidResponse.response);
+            }
+            return null;
+          },
+          shouldOverrideUrlLoading: (controller, navigationAction) async =>
+              NavigationActionPolicy.ALLOW,
+          onLoadStop: _onPageFinished,
+          gestureRecognizers: {
+            Factory<WebViewHorizontalGestureRecognizer>(
+                () => webViewHorizontalGestureRecognizer),
+            Factory<LongPressGestureRecognizer>(
+                () => LongPressGestureRecognizer()),
+          },
+          contextMenu: _contextMenu,
+          onWebViewCreated: _onWebViewCreated,
+        )
+      : const SizedBox.shrink();
 
   ContextMenu get _contextMenu => ContextMenu(
         menuItems: [
@@ -240,9 +240,33 @@ class WebViewScreenState extends State<WebViewScreen> {
         ],
       );
 
+  // Future<void> _decryptHtml() async {
+  //   String encryptedContent = await _controller?.evaluateJavascript(source: """
+  //               (function() {
+  //                 var preElement = document.querySelector('pre');
+  //                 if (preElement) {
+  //                   return preElement.innerText;
+  //                 } else {
+  //                   return null;
+  //                 }
+  //               })();
+  //             """);
+  //   final data = {
+  //     'privateKey': privateKey,
+  //     'passphrase': passphrase,
+  //     'encryptedMessage': encryptedContent,
+  //   };
+
+  //   // Send the data to the embedded HTML page
+  //   _controller?.evaluateJavascript(source: """
+  //               window.postMessage($data);
+  //             """);
+  // }
+
   void _onPageFinished(InAppWebViewController controller, Uri? url) async {
     // Fimber.d("_onPageFinished[$position]: $url");
     try {
+      // await _decryptHtml();
       OpenPageRequest? openPageRequestData =
           _getOpenPageRequestFromCommand(readerContext.readerCommand);
       List<String> elementIds =

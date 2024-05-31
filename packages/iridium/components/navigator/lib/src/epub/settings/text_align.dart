@@ -4,12 +4,12 @@
 
 import 'package:equatable/equatable.dart';
 
-class TextAlign with EquatableMixin {
-  static const TextAlign left = TextAlign._(0, "left");
-  static const TextAlign center = TextAlign._(1, "center");
-  static const TextAlign right = TextAlign._(2, "right");
-  static const TextAlign justify = TextAlign._(3, "justify");
-  static const List<TextAlign> values = [
+class TextAligns with EquatableMixin {
+  static const TextAligns left = TextAligns._(0, "left");
+  static const TextAligns center = TextAligns._(1, "center");
+  static const TextAligns right = TextAligns._(2, "right");
+  static const TextAligns justify = TextAligns._(3, "justify");
+  static const List<TextAligns> values = [
     left,
     center,
     right,
@@ -19,14 +19,13 @@ class TextAlign with EquatableMixin {
   final int id;
   final String name;
 
-  const TextAlign._(this.id, this.name);
+  const TextAligns._(this.id, this.name);
 
   @override
   List<Object> get props => [id];
 
-  static TextAlign from(int id) =>
+  static TextAligns from(int id) =>
       values.firstWhere((type) => type.id == id, orElse: () => left);
-
   @override
   String toString() => 'TextAlign{id: $id, name: $name}';
 }

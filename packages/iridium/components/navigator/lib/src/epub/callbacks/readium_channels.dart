@@ -34,7 +34,6 @@ class ReadiumChannels extends JavascriptChannels {
           href: _spineItemContext.spineItem.href,
           type: _spineItemContext.spineItem.type ?? "text/html",
           title: _spineItemContext.spineItem.title,
-
         );
 
   @override
@@ -62,12 +61,12 @@ class ReadiumChannels extends JavascriptChannels {
       try {
         PaginationInfo paginationInfo = PaginationInfo.fromJson(
             arguments.first,
-            _spineItemContext.spineItemIndex,locator,
+            _spineItemContext.spineItemIndex,
+            locator,
             _spineItemContext.linkPagination);
         _spineItemContext.notifyPaginationInfo(paginationInfo);
       } on Object catch (e, stacktrace) {
-        Fimber.d("onPaginationChanged error: $e, $stacktrace",
-            ex: e, stacktrace: stacktrace);
+        print("onPaginationChanged error: $e, $stacktrace");
       }
     }
   }
@@ -126,7 +125,6 @@ class ReadiumChannels extends JavascriptChannels {
     double clientWidth = computeHorizontalScrollExtent();
     double thresholdRange = 0.2 * clientWidth;
 
-    // FIXME: Call listener.onTap if scrollLeft|Right fails
     if (event.point.dx < thresholdRange) {
       _scrollLeft(false);
       return true;
@@ -147,11 +145,11 @@ class ReadiumChannels extends JavascriptChannels {
   bool handleFootnote(String targetElement) => true;
 
   void _onSwipeUp(List<dynamic> arguments) {
-    viewerSettingsBloc?.add(IncrFontSizeEvent());
+    // viewerSettingsBloc?.add(IncrFontSizeEvent());
   }
 
   void _onSwipeDown(List<dynamic> arguments) {
-    viewerSettingsBloc?.add(DecrFontSizeEvent());
+    // viewerSettingsBloc?.add(DecrFontSizeEvent());
   }
 
   void _scrollRight(bool animated) {

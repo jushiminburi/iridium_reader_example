@@ -83,9 +83,9 @@
                 var img = $(this)[0];
                 var url = img.src;
                 var rect = img.getBoundingClientRect();
-
                 imageZoomed(url);
             });
         }
     };
 })();
+

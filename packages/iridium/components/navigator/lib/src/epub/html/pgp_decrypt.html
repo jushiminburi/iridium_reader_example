@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PGP Decryption</title>
+  <script src="https://cdn.jsdelivr.net/npm/openpgp@5.0.0/dist/openpgp.min.js"></script>
+</head>
+<body>
+  <script>
+    async function decryptMessage(privateKeyArmored, passphrase, encryptedMessage) {
+      try {
+        const { keys: [privateKey] } = await openpgp.readKey({ armoredKey: privateKeyArmored });
+        await openpgp.decryptKey({ privateKey, passphrase });
+        const message = await openpgp.readMessage({ armoredMessage: encryptedMessage });
+        const { data: decrypted } = await openpgp.decrypt({
+          message,
+          decryptionKeys: privateKey
+        });
+        return decrypted;
+      } catch (error) {
+        return `Error: ${error.message}`;
+      }
+    }
+    window.addEventListener('message', async (event) => {
+      const { privateKey, passphrase, encryptedMessage } = event.data;
+      const decryptedMessage = await decryptMessage(privateKey, passphrase, encryptedMessage);
+      window.flutter_inappwebview.callHandler(decryptedMessage);
+    });
+  </script>
+</body>
+</html>

@@ -57,7 +57,7 @@ class PaginationInfo {
 
   static Page _openPageFromJson(Map<String, dynamic> json) {
     Map<String, dynamic> openPage = json["openPage"];
-    return Page(openPage["spineIteđmPageIndex"], openPage["spineItemPageCount"],
+    return Page(openPage["spineItemPageIndex"], openPage["spineItemPageCount"],
         openPage["spineItemPageThumbnailsCount"] ?? 1);
   }
 

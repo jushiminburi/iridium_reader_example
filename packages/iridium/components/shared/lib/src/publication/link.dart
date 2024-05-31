@@ -98,7 +98,7 @@ class Link with EquatableMixin, JSONable {
   final String? type;
 
   /// (Nullable) Title of the linked resource.
-  final String? title;
+   String? title;
 
   /// Relations between the linked resource and its containing collection.
   final Set<String> rels;

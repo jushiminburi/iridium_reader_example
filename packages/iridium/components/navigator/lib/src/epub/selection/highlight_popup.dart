@@ -45,8 +45,7 @@ class HighlightPopup extends SelectionPopup {
                               selection, style, color);
                         }
                         close();
-                      }))
-                  .toList(),
+                      })).toList(),
               buildNoteOption(context, selection, highlightId),
               if (highlightId != null) buildDeleteOption(context, highlightId),
             ],
@@ -54,10 +53,9 @@ class HighlightPopup extends SelectionPopup {
         ));
   }
 
-  Widget buildColorOption(Color color, void Function() action) =>
-      GestureDetector(
-        onTap: action,
-        child: Container(
+  Widget buildColorOption(Color color, VoidCallback action) => IconButton(
+        onPressed: action,
+        icon: Container(
             width: 30,
             decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
       );

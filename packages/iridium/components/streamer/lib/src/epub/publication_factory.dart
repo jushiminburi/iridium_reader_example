@@ -80,8 +80,17 @@ class PublicationFactory {
         navigationData.map((key, value) => MapEntry(
             (key == "page-list") ? "pageList" : key,
             [PublicationCollection(links: value)]));
+    Map<String, String> tocMap = {
+      for (var item in toc) item.href: item.title ?? ""
+    };
+    for (var item in readingOrder) {
+      String normalizedHref =
+          item.href.startsWith('/') ? item.href.substring(1) : item.href;
+      if (tocMap.containsKey(normalizedHref)) {
+        item.title = tocMap[normalizedHref];
+      }
+    }
 
-    // Build Publication object
     return Manifest(
         metadata: metadata,
         links: metadataLinks,

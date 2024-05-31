@@ -12,7 +12,7 @@ class ReaderThemeConfig with EquatableMixin implements JSONable {
   final String name;
   Color? textColor;
   Color? backgroundColor;
-  TextAlign? textAlign;
+  TextAligns? textAlign;
   LineHeight? lineHeight;
   WordSpacing? wordSpacing;
   LetterSpacing? letterSpacing;
@@ -54,7 +54,7 @@ class ReaderThemeConfig with EquatableMixin implements JSONable {
     String? name,
     Color? textColor,
     Color? backgroundColor,
-    TextAlign? textAlign,
+    TextAligns? textAlign,
     LineHeight? lineHeight,
     WordSpacing? wordSpacing,
     LetterSpacing? letterSpacing,
@@ -118,8 +118,8 @@ class ReaderThemeConfig with EquatableMixin implements JSONable {
   static Color? _asColor(dynamic color) =>
       (color != null) ? Color(color as int) : null;
 
-  static TextAlign? _asTextAlign(dynamic textAlign) =>
-      (textAlign != null) ? TextAlign.from(textAlign as int) : null;
+  static TextAligns? _asTextAlign(dynamic textAlign) =>
+      (textAlign != null) ? TextAligns.from(textAlign as int) : null;
 
   static LineHeight? _asLineHeight(dynamic lineHeight) =>
       (lineHeight != null) ? LineHeight.from(lineHeight as int) : null;
