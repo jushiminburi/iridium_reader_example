@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mno_navigator/epub.dart';
 import 'package:mno_navigator/publication.dart';
 import 'package:mno_shared/publication.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AnnotationsPanel extends StatefulWidget {
   final ReaderContext readerContext;
@@ -50,18 +51,16 @@ class AnnotationsPanelState extends State<AnnotationsPanel> {
               }
               return Column(children: [
                 Container(
+                  width: double.infinity,
                   height: 50,
                   decoration: const BoxDecoration(
                       border:
                           Border(bottom: BorderSide(color: Color(0xffE0E0E0)))),
-                  child: const Text(
-                    'Dấu trang',
-                    style: TextStyle(
-                        fontStyle: ,
-                        fontSize: 22,
-                        decoration: TextDecoration.none,
-                        fontWeight: FontWeight.w500),
-                  ),
+                  child: Text('Dấu trang',
+                      style: GoogleFonts.inter(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w500,
+                          decoration: TextDecoration.none)),
                 ),
                 Expanded(
                   child: ListView.separated(
