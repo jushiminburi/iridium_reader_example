@@ -33,9 +33,11 @@ class HttpAsset extends PublicationAsset {
 
   @override
   Future<Try<Fetcher, OpeningException>> createFetcher(
-          PublicationAssetDependencies dependencies, String? credentials,
-          {bool useSniffers = true}) async =>
-      Try.success(HttpFetcher(rootHref));
+      PublicationAssetDependencies dependencies, String? credentials,
+      {bool useSniffers = true}) async {
+    Fetcher fetcher = HttpFetcher(rootHref);
+    return Try.success(fetcher);
+  }
 
   @override
   String toString() => '$runtimeType{$rootHref}';

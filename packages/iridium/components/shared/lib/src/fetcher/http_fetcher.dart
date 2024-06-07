@@ -18,7 +18,9 @@ class HttpFetcher extends Fetcher {
 
   final List<Resource> _openedResources = [];
 
-  HttpFetcher(this.rootHref);
+  HttpFetcher(this.rootHref){
+
+  }
 
   @override
   Future<List<Link>> links() async => [Link(href: Uri.parse(rootHref).path)];
@@ -52,12 +54,13 @@ class HttpResource extends Resource {
   Future<ResourceTry<http.Response>> get response async =>
       caching[url] ??= await catching(() async {
         Uri uri = Uri.parse("$url");
-        return http.get(uri, headers: {
+        final response = await http.get(uri, headers: {
           'Access-Control-Allow-Origin': 'http://localhost:49430',
           'Access-Control-Allow-Methods':
               'GET, POST, PATCH, PUT, DELETE, OPTIONS',
           'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
         });
+        return response;
       });
 
   @override

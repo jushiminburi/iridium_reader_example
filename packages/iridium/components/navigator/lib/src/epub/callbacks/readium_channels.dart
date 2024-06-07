@@ -61,8 +61,7 @@ class ReadiumChannels extends JavascriptChannels {
       try {
         PaginationInfo paginationInfo = PaginationInfo.fromJson(
             arguments.first,
-            _spineItemContext.spineItemIndex,
-            locator,
+            _spineItemContext.spineItemIndex,locator,
             _spineItemContext.linkPagination);
         _spineItemContext.notifyPaginationInfo(paginationInfo);
       } on Object catch (e, stacktrace) {

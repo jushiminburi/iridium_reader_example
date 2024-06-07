@@ -22,13 +22,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   final GlobalKey webViewKey = GlobalKey();
 
   @override
   void initState() {
     super.initState();
-  }                                        
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,5 +36,8 @@ class _MyAppState extends State<MyApp> {
     return EpubScreen.fromPath(
         filePath:
             '/Users/vhmt/Desktop/iridium_reader_example/assets/images/toc_sub_toc.epub');
+    // return EpubScreen.fromUri(
+    //     rootHref:
+    //         'https://www.epubbooks.com/downloads/54a5351c-d31b-490f-97a6-38f049854732/file');
   }
 }

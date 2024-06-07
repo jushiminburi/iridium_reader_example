@@ -60,10 +60,9 @@ extension ReaderAnnotationDecoration on ReaderAnnotation {
     Decoration createDecoration(
             {required String idSuffix, required DecorationStyle style}) =>
         Decoration(
-          id: "$id-$idSuffix",
-          locator: Locator.fromJsonString(location)!,
-          style: style,
-        );
+            id: "$id-$idSuffix",
+            locator: Locator.fromJsonString(location)!,
+            style: style);
 
     DecorationStyle? decorationStyle;
     if (tint != null) {

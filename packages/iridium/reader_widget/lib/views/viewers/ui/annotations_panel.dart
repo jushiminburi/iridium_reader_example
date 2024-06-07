@@ -51,14 +51,20 @@ class AnnotationsPanelState extends State<AnnotationsPanel> {
               }
               return Column(children: [
                 Container(
+                  alignment: Alignment.center,
                   width: double.infinity,
                   height: 50,
                   decoration: const BoxDecoration(
                       border:
                           Border(bottom: BorderSide(color: Color(0xffE0E0E0)))),
-                  child: Text('Dấu trang',
+                  child: Text(
+                      _annotationType == AnnotationType.bookmark
+                          ? 'Dấu trang'
+                          : 'Chú thích',
+                      textAlign: TextAlign.center,
                       style: GoogleFonts.inter(
-                          fontSize: 24,
+                          color: Colors.black,
+                          fontSize: 20,
                           fontWeight: FontWeight.w500,
                           decoration: TextDecoration.none)),
                 ),
@@ -89,7 +95,10 @@ class AnnotationsPanelState extends State<AnnotationsPanel> {
     return Material(
         color: const Color(0xffF8F8F8),
         child: ListTile(
-            title: Text(title ?? text ?? ""),
+            title: Text(
+              title ?? text ?? "",
+              style: GoogleFonts.inter(fontWeight: FontWeight.w500),
+            ),
             subtitle: Text("$progression%", textAlign: TextAlign.right),
             onTap: () => _onTap(readerAnnotation)));
   }
@@ -112,7 +121,7 @@ class AnnotationsPanelState extends State<AnnotationsPanel> {
         subtitle: Padding(
           padding: const EdgeInsets.only(top: 10),
           child: readerAnnotation.annotation != null
-              ? Text("note: ${readerAnnotation.annotation ?? ""}")
+              ? Text("Ghi chú: ${readerAnnotation.annotation ?? ""}")
               : null,
         ),
         onTap: () => _onTap(readerAnnotation),

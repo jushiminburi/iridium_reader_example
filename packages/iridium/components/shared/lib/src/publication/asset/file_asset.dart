@@ -33,22 +33,17 @@ class FileAsset extends PublicationAsset {
     if (_mediaType != null) {
       return Future.value(_mediaType);
     }
-
     if (knownMediaType != null) {
       _mediaType = knownMediaType;
       return Future.value(_mediaType ??= knownMediaType);
     }
-
     MediaType? ofFile =
         await MediaType.ofFileWithSingleHint(file, mediaType: mediaTypeHint);
-
     if (ofFile != null) {
       return _mediaType ??= ofFile;
     }
-
     return _mediaType ??= MediaType.binary;
   }
-
   @override
   Future<Try<Fetcher, OpeningException>> createFetcher(
       PublicationAssetDependencies dependencies, String? credentials,
