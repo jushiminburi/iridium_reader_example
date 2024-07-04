@@ -143,7 +143,6 @@ class EpubScreenState extends BookScreenState<EpubScreen, EpubController> {
         'theme': json.encode(_readerThemeBloc.currentTheme.toJson()),
       });
     } catch (e) {
-      // perhaps a snackbar notification can be added to indicate that there was a problem saving last location and settings
       debugPrint('error returning location and settings');
     }
     return true;

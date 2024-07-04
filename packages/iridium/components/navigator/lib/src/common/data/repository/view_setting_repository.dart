@@ -2,6 +2,8 @@ import 'package:mno_navigator/data.dart';
 import 'package:mno_navigator/epub.dart';
 import 'package:sembast/sembast.dart';
 
+
+
 class ViewsettingRepository {
   final Database _database;
   final _store = intMapStoreFactory.store("viewSetting_store");

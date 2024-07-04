@@ -21,7 +21,10 @@ class AnnotationRepository {
   }
 
   Future<void> clearAnnotation() async => await _store.delete(_database);
-
   Future<void> deleteAnnotationLocal(ReaderAnnotation annotation) async =>
       await _store.record(annotation.id.toInt()).delete(_database);
 }
+
+
+
+

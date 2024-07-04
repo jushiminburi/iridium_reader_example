@@ -15,7 +15,6 @@ import 'package:mno_shared/epub.dart';
 import 'package:mno_shared/publication.dart';
 import 'package:mno_streamer/parser.dart';
 
-
 abstract class PublicationController extends NavigationController {
   final Function onServerClosed;
   final Function? onPageJump;
@@ -126,7 +125,6 @@ abstract class PublicationController extends NavigationController {
 
   void onPageChanged(int position) =>
       currentSpineItemBloc.add(CurrentSpineItemEvent(position));
-
 
   void _onServerStarted(ReaderContext readerContext) {
     readerCommandSubscription?.cancel();

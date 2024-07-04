@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN"
+ "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd"><ncx version="2005-1" xmlns="http://www.daisy.org/z3986/2005/ncx/">
+  <head>
+    <meta content="urn:uuid:36f2b251-fdfb-43ac-9633-d823698a7ad4" name="dtb:uid"/>
+    <meta content="3" name="dtb:depth"/>
+    <meta content="0" name="dtb:totalPageCount"/>
+    <meta content="0" name="dtb:maxPageNumber"/>
+  </head>
+  <docTitle>
+    <text>BÔI TRƠN THỦY TĨNH VÀ THỦY ĐỘNG QUYỂN 2</text>
+  </docTitle>
+  <navMap>
+    <navPoint id="navPoint-1" playOrder="1">
+      <navLabel>
+        <text>BÔI TRƠN THỦY TĨNH VÀ THỦY ĐỘNG QUYỂN 2</text>
+      </navLabel>
+      <content src="Text/Section_9.html"/>
+    </navPoint>
+    <navPoint id="navPoint-2" playOrder="2">
+      <navLabel>
+        <text>LỜI NÓI ĐẦU</text>
+      </navLabel>
+      <content src="Text/section_1.html"/>
+    </navPoint>
+    <navPoint id="navPoint-3" playOrder="3">
+      <navLabel>
+        <text>MỤC LỤC</text>
+      </navLabel>
+      <content src="Text/section_2.html"/>
+    </navPoint>
+    <navPoint id="navPoint-4" playOrder="4">
+      <navLabel>
+        <text>Chương 4 BÔI TRƠN THỦY ĐỘNG</text>
+      </navLabel>
+      <content src="Text/section_6.html"/>
+      <navPoint id="navPoint-5" playOrder="5">
+        <navLabel>
+          <text>4.1. Giới thiệu chung</text>
+        </navLabel>
+        <content src="Text/section_6.html#sigil_toc_id_1"/>
+      </navPoint>
+      <navPoint id="navPoint-6" playOrder="6">
+        <navLabel>
+          <text>4.2. Phương trình Reynolds theo một chiều</text>
+        </navLabel>
+        <content src="Text/section_6.html#sigil_toc_id_2"/>
+      </navPoint>
+      <navPoint id="navPoint-7" playOrder="7">
+        <navLabel>
+          <text>4.3. Ổ bạc trượt có chiều rộng bề mặt vô hạn</text>
+        </navLabel>
+        <content src="Text/section_6.html#sigil_toc_id_3"/>
+        <navPoint id="navPoint-8" playOrder="8">
+          <navLabel>
+            <text>4.3.1. Profin màng dầu có dạng hàm mũ</text>
+          </navLabel>
+          <content src="Text/section_6.html#sigil_toc_id_4"/>
+        </navPoint>
+        <navPoint id="navPoint-9" playOrder="9">
+          <navLabel>
+            <text>4.3.2. Profin bề mặt dạng mặt phẳng nghiêng</text>
+          </navLabel>
+          <content src="Text/section_6.html#sigil_toc_id_5"/>
+        </navPoint>
+        <navPoint id="navPoint-10" playOrder="10">
+          <navLabel>
+            <text>4.3.3. Profin bề mặt dạng bậc Rayleigh</text>
+          </navLabel>
+          <content src="Text/section_6.html#sigil_toc_id_6"/>
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-11" playOrder="11">
+        <navLabel>
+          <text>4.4. Vấn đề thực tiễn và các vấn đề quan tâm khi thiết kế ổ đỡ thủy động</text>
+        </navLabel>
+        <content src="Text/section_6.html#sigil_toc_id_7"/>
+        <navPoint id="navPoint-12" playOrder="12">
+          <navLabel>
+            <text>4.4.1. Ảnh hưởng của kích thước giới hạn trong ổ đỡ thủy động</text>
+          </navLabel>
+          <content src="Text/section_6.html#sigil_toc_id_8"/>
+        </navPoint>
+        <navPoint id="navPoint-13" playOrder="13">
+          <navLabel>
+            <text>4.4.2. Các ổ trục có mảnh bạc tự lựa</text>
+          </navLabel>
+          <content src="Text/section_6.html#sigil_toc_id_9"/>
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-14" playOrder="14">
+        <navLabel>
+          <text>4.5. Phương trình Reynolds hai chiều</text>
+        </navLabel>
+        <content src="Text/section_6.html#sigil_toc_id_10"/>
+        <navPoint id="navPoint-15" playOrder="15">
+          <navLabel>
+            <text>4.5.1. Phương trình Reynolds tổng quát hai chiều</text>
+          </navLabel>
+          <content src="Text/section_6.html#sigil_toc_id_11"/>
+        </navPoint>
+        <navPoint id="navPoint-16" playOrder="16">
+          <navLabel>
+            <text>4.5.2. Ổ trục hẹp</text>
+          </navLabel>
+          <content src="Text/section_6.html#sigil_toc_id_12"/>
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-17" playOrder="17">
+        <navLabel>
+          <text>4.6. Bôi trơn dạng đĩa</text>
+        </navLabel>
+        <content src="Text/section_6.html#sigil_toc_id_13"/>
+        <navPoint id="navPoint-18" playOrder="18">
+          <navLabel>
+            <text>4.6.1. Hình dáng hình học</text>
+          </navLabel>
+          <content src="Text/section_6.html#sigil_toc_id_14"/>
+        </navPoint>
+        <navPoint id="navPoint-19" playOrder="19">
+          <navLabel>
+            <text>4.6.2. Các điều kiện biên Sommerfeld, nửa Sommerfeld và Reynolds</text>
+          </navLabel>
+          <content src="Text/section_6.html#sigil_toc_id_15"/>
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-20" playOrder="20">
+        <navLabel>
+          <text>4.7. Ổ đỡ thủy động</text>
+        </navLabel>
+        <content src="Text/section_6.html#sigil_toc_id_16"/>
+        <navPoint id="navPoint-21" playOrder="21">
+          <navLabel>
+            <text>4.7.1. Giải pháp cho các ổ thủy động ngắn</text>
+          </navLabel>
+          <content src="Text/section_6.html#sigil_toc_id_17"/>
+        </navPoint>
+        <navPoint id="navPoint-22" playOrder="22">
+          <navLabel>
+            <text>4.7.2. Giải pháp cho các ổ thủy động dài</text>
+          </navLabel>
+          <content src="Text/section_6.html#sigil_toc_id_18"/>
+        </navPoint>
+        <navPoint id="navPoint-23" playOrder="23">
+          <navLabel>
+            <text>4.7.3. Một số kết quả nghiên cứu thực nghiệm</text>
+          </navLabel>
+          <content src="Text/section_6.html#sigil_toc_id_19"/>
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-24" playOrder="24">
+        <navLabel>
+          <text>4.8. Ảnh hưởng của nhiệt đến bôi trơn ổ trục</text>
+        </navLabel>
+        <content src="Text/section_6.html#sigil_toc_id_20"/>
+      </navPoint>
+      <navPoint id="navPoint-25" playOrder="25">
+        <navLabel>
+          <text>4.9. Một số ảnh hưởng động lực học trong ổ đỡ thủy động</text>
+        </navLabel>
+        <content src="Text/section_6.html#sigil_toc_id_21"/>
+        <navPoint id="navPoint-26" playOrder="26">
+          <navLabel>
+            <text>4.9.1. Hiệu ứng màng dầu nén</text>
+          </navLabel>
+          <content src="Text/section_6.html#sigil_toc_id_22"/>
+        </navPoint>
+        <navPoint id="navPoint-27" playOrder="27">
+          <navLabel>
+            <text>4.9.2. Ổ trục chịu tải trọng động</text>
+          </navLabel>
+          <content src="Text/section_6.html#sigil_toc_id_23"/>
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-28" playOrder="28">
+        <navLabel>
+          <text>4.10. Bôi trơn các tiếp xúc cầu</text>
+        </navLabel>
+        <content src="Text/section_6.html#sigil_toc_id_24"/>
+      </navPoint>
+      <navPoint id="navPoint-29" playOrder="29">
+        <navLabel>
+          <text>4.11. Dòng chảy rối trong màng dầu thủy động</text>
+        </navLabel>
+        <content src="Text/section_6.html#sigil_toc_id_25"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-30" playOrder="30">
+      <navLabel>
+        <text>Chương 5 BÔI TRƠN TRỤC CHÍNH MÁY CÔNG CỤ</text>
+      </navLabel>
+      <content src="Text/Section_7.html"/>
+      <navPoint id="navPoint-31" playOrder="31">
+        <navLabel>
+          <text>5.1. Chức năng và yêu cầu kỹ thuật của trục chính máy công cụ [15]</text>
+        </navLabel>
+        <content src="Text/Section_7.html#sigil_toc_id_26"/>
+      </navPoint>
+      <navPoint id="navPoint-32" playOrder="32">
+        <navLabel>
+          <text>5.2. Vật liệu và kết cấu cơ bản của đầu trục chính máy công cụ</text>
+        </navLabel>
+        <content src="Text/Section_7.html#sigil_toc_id_27"/>
+        <navPoint id="navPoint-33" playOrder="33">
+          <navLabel>
+            <text>5.2.1. Thiết kế kết cấu trục chính</text>
+          </navLabel>
+          <content src="Text/Section_7.html#sigil_toc_id_28"/>
+        </navPoint>
+        <navPoint id="navPoint-34" playOrder="34">
+          <navLabel>
+            <text>5.2.2. Độ cứng khớp côn</text>
+          </navLabel>
+          <content src="Text/Section_7.html#sigil_toc_id_29"/>
+        </navPoint>
+        <navPoint id="navPoint-35" playOrder="35">
+          <navLabel>
+            <text>5.2.3. Kết cấu cơ bản của cơ cấu kẹp chặt khớp côn</text>
+          </navLabel>
+          <content src="Text/Section_7.html#sigil_toc_id_30"/>
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-36" playOrder="36">
+        <navLabel>
+          <text>5.3. Cụm trục chính máy công cụ dùng ổ lăn</text>
+        </navLabel>
+        <content src="Text/Section_7.html#sigil_toc_id_31"/>
+        <navPoint id="navPoint-37" playOrder="37">
+          <navLabel>
+            <text>5.3.1. Cấp chính xác của ổ lăn cụm trục chính máy công cụ</text>
+          </navLabel>
+          <content src="Text/Section_7.html#sigil_toc_id_32"/>
+        </navPoint>
+        <navPoint id="navPoint-38" playOrder="38">
+          <navLabel>
+            <text>5.3.2. Lựa chọn lắp ghép</text>
+          </navLabel>
+          <content src="Text/Section_7.html#sigil_toc_id_33"/>
+        </navPoint>
+        <navPoint id="navPoint-39" playOrder="39">
+          <navLabel>
+            <text>5.3.3. Độ cứng vững ổ lăn</text>
+          </navLabel>
+          <content src="Text/Section_7.html#sigil_toc_id_34"/>
+        </navPoint>
+        <navPoint id="navPoint-40" playOrder="40">
+          <navLabel>
+            <text>5.3.4. Độ dôi ban đầu</text>
+          </navLabel>
+          <content src="Text/Section_7.html#sigil_toc_id_35"/>
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-41" playOrder="41">
+        <navLabel>
+          <text>5.4. Cụm trục chính máy công cụ dùng ổ đỡ thủy động</text>
+        </navLabel>
+        <content src="Text/Section_7.html#sigil_toc_id_36"/>
+        <navPoint id="navPoint-42" playOrder="42">
+          <navLabel>
+            <text>5.4.1. Vật liệu cho ổ đỡ thủy động</text>
+          </navLabel>
+          <content src="Text/Section_7.html#sigil_toc_id_37"/>
+        </navPoint>
+        <navPoint id="navPoint-43" playOrder="43">
+          <navLabel>
+            <text>5.4.2. Các tham số kết cấu</text>
+          </navLabel>
+          <content src="Text/Section_7.html#sigil_toc_id_38"/>
+        </navPoint>
+        <navPoint id="navPoint-44" playOrder="44">
+          <navLabel>
+            <text>5.4.3. Bôi trơn cho ổ đỡ trục chính</text>
+          </navLabel>
+          <content src="Text/Section_7.html#sigil_toc_id_39"/>
+        </navPoint>
+        <navPoint id="navPoint-45" playOrder="45">
+          <navLabel>
+            <text>5.4.4. Khả năng chịu tải trọng</text>
+          </navLabel>
+          <content src="Text/Section_7.html#sigil_toc_id_40"/>
+        </navPoint>
+        <navPoint id="navPoint-46" playOrder="46">
+          <navLabel>
+            <text>5.4.5. Độ cứng vững của ổ đỡ thủy động</text>
+          </navLabel>
+          <content src="Text/Section_7.html#sigil_toc_id_41"/>
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-47" playOrder="47">
+        <navLabel>
+          <text>5.5. Cụm trục chính máy công cụ dùng ổ đỡ thủy tĩnh</text>
+        </navLabel>
+        <content src="Text/Section_7.html#sigil_toc_id_42"/>
+        <navPoint id="navPoint-48" playOrder="48">
+          <navLabel>
+            <text>5.5.1. Khả năng chịu tải</text>
+          </navLabel>
+          <content src="Text/Section_7.html#sigil_toc_id_43"/>
+        </navPoint>
+        <navPoint id="navPoint-49" playOrder="49">
+          <navLabel>
+            <text>5.5.2. Độ cứng vững</text>
+          </navLabel>
+          <content src="Text/Section_7.html#sigil_toc_id_44"/>
+        </navPoint>
+        <navPoint id="navPoint-50" playOrder="50">
+          <navLabel>
+            <text>5.5.3. Tổn thất trong ổ đỡ thủy tĩnh</text>
+          </navLabel>
+          <content src="Text/Section_7.html#sigil_toc_id_45"/>
+        </navPoint>
+        <navPoint id="navPoint-51" playOrder="51">
+          <navLabel>
+            <text>5.5.4. Lựa chọn và tối ưu hóa các tham số ổ đỡ thủy tĩnh</text>
+          </navLabel>
+          <content src="Text/Section_7.html#sigil_toc_id_46"/>
+        </navPoint>
+        <navPoint id="navPoint-52" playOrder="52">
+          <navLabel>
+            <text>5.5.5. Lựa chọn số lượng buồng dầu</text>
+          </navLabel>
+          <content src="Text/Section_7.html#sigil_toc_id_47"/>
+        </navPoint>
+        <navPoint id="navPoint-53" playOrder="53">
+          <navLabel>
+            <text>5.5.6. Hình dạng của các buồng dầu</text>
+          </navLabel>
+          <content src="Text/Section_7.html#sigil_toc_id_48"/>
+        </navPoint>
+        <navPoint id="navPoint-54" playOrder="54">
+          <navLabel>
+            <text>5.5.7. Yêu cầu về độ chính xác chế tạo và lắp ráp</text>
+          </navLabel>
+          <content src="Text/Section_7.html#sigil_toc_id_49"/>
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-55" playOrder="55">
+        <navLabel>
+          <text>5.6. Giải pháp bôi trơn thủy tĩnh nâng cấp cụm ổ trục chính thủy động tự lựa ba mảnh</text>
+        </navLabel>
+        <content src="Text/Section_7.html#sigil_toc_id_50"/>
+        <navPoint id="navPoint-56" playOrder="56">
+          <navLabel>
+            <text>5.6.1. Cụm ổ trục chính thủy động tự lựa ba mảnh máy mài tròn ngoài cỡ trung 3K12</text>
+          </navLabel>
+          <content src="Text/Section_7.html#sigil_toc_id_51"/>
+        </navPoint>
+        <navPoint id="navPoint-57" playOrder="57">
+          <navLabel>
+            <text>5.6.2. Giải pháp bôi trơn thủy tĩnh cho cụm ổ trục chính máy mài tròn ngoài 3K12</text>
+          </navLabel>
+          <content src="Text/Section_7.html#sigil_toc_id_52"/>
+        </navPoint>
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-58" playOrder="58">
+      <navLabel>
+        <text>TÀI LIỆU THAM KHẢO</text>
+      </navLabel>
+      <content src="Text/Section_8.html"/>
+    </navPoint>
+  </navMap>
+</ncx>

@@ -18,7 +18,6 @@ class ReaderToolbar extends StatefulWidget {
       required this.readerContext,
       required this.onSkipLeft,
       required this.onSkipRight});
-
   @override
   State<StatefulWidget> createState() => ReaderToolbarState();
 }

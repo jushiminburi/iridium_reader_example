@@ -11,7 +11,6 @@ class ViewerSettings {
   final int columnGap;
   bool scrollSnapShouldStop = true;
 
-  // If true, column gap will not be part of JSON conversion
   bool hasNoStyle = false;
 
   ViewerSettings(this.syntheticSpreadMode, this.scrollMode, this.fontSize,

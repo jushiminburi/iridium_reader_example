@@ -1,0 +1,582 @@
+div,p{text-align: justify;
+  padding: 0px;
+  margin: 0px;
+}
+
+h1, h2{
+  margin-top: 25px;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+h1{
+  font-size: 1.7em;
+}
+h2{
+  font-size: 1.5em;
+  padding-top: 12px;
+  margin-bottom: 8px;
+}
+
+
+h3, h4{
+  padding-top: 8px;
+  margin-bottom: 4px;
+  line-height: 1.2em;
+}
+
+h3{
+  font-size: 1.3em;
+}
+h4{
+  font-size: 1.1em;
+}
+
+p, div{
+  margin-bottom: 8px;
+}
+
+img{
+  width: auto;
+  height: auto;  
+}
+
+#container > .inner > div > p{
+  font-size: 1.0em;
+}
+
+p{
+  text-indent: 28px;
+}
+
+.subtitle{
+
+}
+
+.category{
+
+}
+
+blockquote{
+  margin: 0px;
+  padding: 8px 20px !important;
+  font-style: italic;
+  font-weight: bold;
+  color: #444;
+}
+
+@media only screen and (min-width: 600px) {
+  blockquote{
+    padding: 8px 50px !important;
+  }
+}
+
+
+.center{
+  text-align: center;
+  text-indent: 0px;
+}
+
+.left{
+  text-align: left;
+  text-indent: 0px;
+}
+
+.right{
+  text-align: right;
+  text-indent: 0px;
+}
+
+span.center, span.left, span.right{
+  display: block;
+}
+
+li{
+  margin-left: -10px;
+}
+
+
+li p{
+  text-indent: 0px;
+}
+
+hr{
+  display: block;
+  width: 20%;
+  margin: 50px auto 40px auto;
+  border: 1px solid #dededc;  
+}
+
+.underline{
+  text-decoration: underline;
+}
+
+.underline.dotted{
+  text-decoration: none;
+  border-bottom: dotted 1px #444;
+}
+
+.line-through{
+  text-decoration: line-through;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.italic{
+  font-style: italic;
+}
+
+.f-left{
+  float: left;
+  margin-right: 8px !important;
+}
+.f-right{
+  float: right;
+  margin-left: 8px !important;
+}
+
+img.f-left{
+  padding-right: 8px !important; 
+  margin-right: 8px !important;
+}
+img.f-right{
+  padding-left: 8px !important;
+  margin-left: 8px !important;
+}
+
+.box{
+  border: solid 1px #eee;
+  border-radius: 3px;
+  padding: 8px;
+  margin: 8px;
+}
+
+.box p{
+  text-indent: 0px;
+}
+
+.w10{
+  max-width: 10%;
+}
+.w25{
+  max-width: 25%;
+}
+.w35{
+  max-width: 35%;
+}
+.w50{
+  max-width: 50%;
+}
+.w75{
+  max-width: 75%;
+}
+.w100{
+  max-width: 100%;
+}
+
+blockquote p, .no-indent{
+  text-indent: 0px;
+}
+
+p.photo.center{
+  font-size: 0.8em;
+}
+
+.panel{
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  padding: 20px;
+  background: #de3f1c;
+  color: #fff;
+}
+
+.panel > *, .box > *{
+  margin: 0 auto;
+  display: block;
+  padding: 8px 20px;
+}
+
+.panel > img, .box > img{
+  padding: 0px;
+}
+
+.panel > h1, .panel > h2{
+  margin-top: 44px;
+}
+
+
+.panel.f-left:not(.w100){
+  margin-right: 20px !important;
+  padding: 8px;
+}
+
+.panel.f-right:not(.w100){
+  margin-left: 20px !important;
+  padding: 8px;
+}
+
+.panel a{
+  color: #eee;
+}
+.panel a:hover{
+  color: #fff;
+}
+
+.panel.grey a{
+  color: #333;
+}
+.panel.grey a:hover{
+  color: #de3f1c;
+}
+
+figure.f-left, figure.f-right {
+  margin-top: 0px !important;
+  max-width: 280px;
+}
+
+figure.f-left{
+  margin-right: 12px !important;
+  text-align: right;
+}
+
+figure.f-right{
+  margin-left: 12px !important;
+  text-align: left;
+}
+
+figure img{
+  max-width: 100%;
+}
+
+figure figcaption{
+  color: #666665;
+  font-size: 0.8em;
+  font-style: italic;
+}
+
+.dropcap:first-letter, span.dropcap{ 
+  float: left; 
+  padding: 4px 0 0 0; 
+  display: block; 
+  font: 50px/40px Georgia, Times, serif;
+}
+
+.no-margin{
+  margin: 0px !important;
+}
+
+
+@media only screen and (max-width: 400px) {
+  .w10, .w25{
+    max-width: 50%;
+  }
+  .w35, .w50, .w75{
+    max-width: 100%;
+  }
+  .f-left, .f-right{
+    float: none;
+    padding-right: 0px !important;
+    margin-right: 0px !important;
+    padding-left: 0px !important;
+    margin-left: 0px !important;
+  }
+
+
+
+  figure.f-left, figure.f-right {
+    margin: 20px !important;
+    width: auto !important;
+  }
+  figure.f-left.hero, figure.f-right.hero {
+    margin: 0px !important;
+    margin-bottom: 20px !important;
+  }
+  .panel.f-right:not(.w100), .panel.f-left:not(.w100){
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+  }  
+  .panel > *:not(span){
+    padding-left: 0px;
+    padding-right: 0px;
+  }  
+}
+
+.block{
+  display: block;
+}
+
+/* display flex for grid view of photos*/ 
+
+div.flex{
+  font-size: 1.0em;
+  display: block;
+  -webkit-box-flex: 1;
+  display: -ms-flex;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+  text-align: center;
+  /*align-items: center;*/
+  -ms-justify-content: center;
+  -moz-justify-content: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+
+    -webkit-box-orient: horizontal;
+    flex-direction: row;
+}
+
+#container > .inner > div.flex{
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  width: 100%;
+} 
+
+div.flex > *{
+  margin: 4px; 
+}
+
+div.flex > :not(figure){
+  padding: 4px 12px;
+  max-width: 322px;
+}
+
+div.flex > img{
+  width: 100%;
+  height: 100%;  
+}
+
+div.flex h1, div.flex h2, div.flex h3, div.flex h4{
+  text-align: left;
+}
+
+div.flex p{
+  font-size: 0.8em;  
+  line-height: 1.4;
+  text-align: left;
+}
+
+div.flex p.no-indent{
+  margin: 4px 0px;
+}
+
+div.flex p.no-indent img.w35, div.flex p.no-indent img.w50, div.flex p.no-indent img.w75{
+  max-width: 100%;
+}
+
+div.flex.panel{
+  padding: 0px;
+}
+
+#container>.inner>.panel:first-child {
+  margin-top: -64px;
+  padding: 8px 20px;
+}
+
+#container>.inner>.panel:last-child {
+  margin-bottom: -64px;
+  padding: 8px 20px;
+}
+
+
+@media only screen and (max-width: 600px) { 
+  div.flex{
+     -ms-flex-wrap: wrap;      
+     -moz-flex-wrap: wrap;      
+     -webkit-flex-wrap: wrap;      
+     flex-wrap: wrap;      
+    }  
+  div.flex > *{
+    width: 45%;
+  }
+
+  div.flex > :not(figure){
+    width: 40%;
+  }
+
+}
+
+
+@media only screen and (max-width: 400px) { 
+  div.flex{
+      display: block;      
+    }
+  div.flex > *{
+    width: auto;
+      margin: 0px;
+  }
+  
+    div.flex figcaption{
+      margin-bottom: 20px;
+    }
+  
+  div.flex > :not(figure){
+    width: auto;
+    padding: 4px 20px;
+  }
+
+  div.flex > img{
+    width: 100%;
+    padding: 0px;
+  }
+}
+
+table{
+    border-collapse: collapse;  
+    font-size: 0.9em;
+    margin: 20px 0px;
+}
+
+table thead{
+  background: #eee;
+}
+
+table th, table td{
+  border: solid 1px #eee; 
+    padding: 3px 8px;
+}
+
+figure figcaption{
+  font-size: 0.8em;
+  line-height: 1.3em;
+  color: #444;
+}
+
+
+@object fullscreen;
+
+    figure.fullscreen{
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        min-height: 100vh;    
+    }
+
+    figure.fullscreen img{
+      display: none; 
+    }
+
+    figure.fullscreen figcaption{
+      font-size: 3em !important; 
+    }
+
+    figure.fullscreen figcaption::after{
+      content: "⇣"; 
+      position: absolute;
+        right: 0%;
+        bottom: -30%;
+        font-size: 0.8em;
+        font-weight: normal;
+    }
+
+    figure.fullscreen.left-bottom figcaption{
+        text-align: left !important;
+        max-width: none !important;
+        margin-left: 0px !important;
+        padding-right: 20% !important;
+        bottom: 10% !important;
+    }
+
+    figure.fullscreen.right-bottom figcaption{
+        text-align: right !important;
+        max-width: none !important;
+        margin-left: 0px !important;
+        padding-left: 20% !important;
+        bottom: 10% !important;
+    }
+
+   figure.fullscreen.center-bottom figcaption{
+        text-align: center !important;
+        max-width: none !important;
+        margin-left: 0px !important;
+        padding: 0px 10% !important;
+        bottom: 10% !important;
+    }
+
+
+    figure.fullscreen.left-top figcaption{
+        text-align: left !important;
+        max-width: none !important;
+        margin-left: 0px !important;
+        padding-right: 20% !important;
+        top: 10% !important;
+    }
+
+    figure.fullscreen.center-top figcaption{
+        text-align: center !important;
+        max-width: none !important;
+        margin-left: 0px !important;
+        padding: 0px 10% !important;
+        top: 10% !important;
+    }
+
+    figure.fullscreen.right-top figcaption{
+        text-align: right !important;
+        max-width: none !important;
+        margin-left: 0px !important;
+        padding-left: 20% !important;
+        top: 10% !important;
+    }
+
+
+    figure.fullscreen.left-middle, figure.fullscreen.center-middle, figure.fullscreen.right-middle{
+        display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+        display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+        display: -webkit-flex;     /* NEW - Chrome */
+        display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+        display: -ms-flexbox;
+        display: flexbox;
+        -webkit-box-flex-direction: row;
+        -moz-box-flex-direction: row;
+        -webkit-flex-direction: row;
+          -ms-flex-direction: row;
+        flex-direction: row;
+    }
+
+    figure.fullscreen.left-middle figcaption, figure.fullscreen.center-middle figcaption, figure.fullscreen.right-middle figcaption{
+        position: static !important;
+        margin: auto;
+        max-width: none !important;
+        width: 100% !important;
+    }
+    figure.fullscreen.left-middle figcaption{
+        text-align: left !important;
+        padding-right: 15% !important;
+
+    }
+    figure.fullscreen.center-middle figcaption{
+        text-align: center !important;
+        padding: 0px 5% !important;
+    }
+    figure.fullscreen.right-middle figcaption{
+        text-align: right !important;
+        padding-left: 15% !important;
+    }
+
+
+    @media screen and (max-width: 600px) , screen and (max-height: 600px) {
+
+      figure.fullscreen figcaption{
+          font-size: 2em !important; 
+      }
+
+    }
+
+    @media screen and (min-width: 800px) , screen and (min-height: 800px) {
+
+      figure.fullscreen.left-middle figcaption{
+          padding-right: 30% !important;
+
+      }
+      figure.fullscreen.center-middle figcaption{
+          padding: 0px 20% !important;
+      }
+      figure.fullscreen.right-middle figcaption{
+          padding-left: 30% !important;
+      }
+
+    }
+
+@end;

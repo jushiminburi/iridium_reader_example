@@ -18,9 +18,7 @@ class HttpFetcher extends Fetcher {
 
   final List<Resource> _openedResources = [];
 
-  HttpFetcher(this.rootHref){
-
-  }
+  HttpFetcher(this.rootHref);
 
   @override
   Future<List<Link>> links() async => [Link(href: Uri.parse(rootHref).path)];
@@ -31,7 +29,7 @@ class HttpFetcher extends Fetcher {
     Uri url = Uri.parse(rootHref).resolve(linkHref);
     return HttpResource(url, link);
   }
-
+  
   @override
   Future<void> close() async {
     await Future.wait(_openedResources.mapNotNull((res) => res.close()));
@@ -77,11 +75,9 @@ class HttpResource extends Resource {
     }
     IntRange range2 = IntRange(max(0, range.first),
         min(range.last, res.contentLength ?? res.bodyBytes.lengthInBytes));
-
     if (range2.isEmpty) {
       return ByteData(0);
     }
-
     return ByteData.sublistView(
         res.bodyBytes.sublist(range2.first, range2.last));
   }

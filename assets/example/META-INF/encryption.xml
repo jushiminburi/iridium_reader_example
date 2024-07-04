@@ -1,0 +1,24 @@
+encryption
+    xmlns =urnoasisnamestcopendocumentxmlnscontainer
+    xmlnsenc=httpwww.w3.org200104xmlenc#
+    xmlnsds=httpwww.w3.org200009xmldsig#
+    encEncryptedKey Id=EK
+        encEncryptionMethod Algorithm=httpwww.w3.org200104xmlenc#rsa-1_5
+        dsKeyInfo
+            dsKeyNameJohn SmithdsKeyName
+        dsKeyInfo
+        encCipherData
+            encCipherValuexyzabcencCipherValue
+        encCipherData
+    encEncryptedKey
+    encEncryptedData Id=ED1
+        encEncryptionMethod Algorithm=httpwww.w3.org200104xmlenc#kw-aes128
+        dsKeyInfo
+            dsRetrievalMethod URI=#EK
+                Type=httpwww.w3.org200104xmlenc#EncryptedKey
+        dsKeyInfo
+        encCipherData
+            encCipherReference URI=image.jpeg
+        encCipherData
+    encEncryptedData
+encryption
