@@ -24,6 +24,7 @@ dependencies:
   sembast: ^3.7.1
   rxdart: ^0.27.7
   universal_io: ^2.2.1
+  loading_animation_widget: ^1.2.1
 
   mno_commons:
     path: ../commons

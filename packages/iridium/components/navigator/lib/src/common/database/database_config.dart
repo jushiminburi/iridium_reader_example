@@ -30,7 +30,8 @@ mixin DatabaseConfig {
   static List<String> databaseNames = [
     annotationDatabaseName,
     themeDatabaseName,
-    viewSettingDatabaseName
+    viewSettingDatabaseName,
+    bookManagementDatabaseName
   ];
   static Future<String> _generateDBPath(String nameDb) async {
     final dir = await getApplicationDocumentsDirectory();
@@ -42,4 +43,5 @@ mixin DatabaseConfig {
   static String get annotationDatabaseName => 'annotations.db';
   static String get themeDatabaseName => 'theme.db';
   static String get viewSettingDatabaseName => 'viewSetting.db';
+  static String get bookManagementDatabaseName => 'bookManagement.db';
 }

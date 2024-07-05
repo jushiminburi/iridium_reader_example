@@ -4,6 +4,7 @@
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:mno_navigator/epub.dart';
 import 'package:mno_navigator/publication.dart';
 import 'package:mno_server/mno_server.dart';
@@ -37,14 +38,13 @@ class EpubNavigatorState extends PublicationNavigatorState<EpubNavigator> {
       EdgeInsets.symmetric(vertical: verticalPadding);
   @override
   void initState() {
-    epubController.pageController.addListener(_onPageChanged);
+    // epubController.pageController.addListener(_onPageChanged);
     super.initState();
   }
 
   @override
   void dispose() {
     epubController.pageController.removeListener(_onPageChanged);
-
     super.dispose();
   }
 
@@ -67,29 +67,36 @@ class EpubNavigatorState extends PublicationNavigatorState<EpubNavigator> {
             create: (BuildContext context) =>
                 publicationController.currentSpineItemBloc),
         BlocProvider(
-          create: (BuildContext context) => publicationController.serverBloc,
-        ),
+            create: (BuildContext context) => publicationController.serverBloc),
       ], child: super.build(context));
 
   @override
-  Widget buildReaderView(List<Link> spine, ServerStarted serverState) =>
-      PageView.builder(
-        controller: epubController.pageController,
-        scrollDirection: Axis.horizontal,
-        // preloadPagesCount: 1,
-        onPageChanged: epubController.onPageChanged,
-        physics: const AlwaysScrollableScrollPhysics(),
-        reverse: readerContext?.readingProgression?.isReverseOrder() ?? false,
-        itemCount: spine.length,
-        itemBuilder: (context, position) =>
-            (Platform.isAndroid || Platform.isIOS)
-                ? WebViewScreen(
-                    address: serverState.address,
-                    link: spine[position],
-                    position: position,
-                    readerContext: readerContext!,
-                    publicationController: epubController,
-                  )
-                : const SizedBox.shrink(),
+  Widget buildReaderView(List<Link> spine, ServerStarted serverState) => Stack(
+        children: [
+          PageView.builder(
+            controller: epubController.pageController,
+            scrollDirection: Axis.horizontal,
+            // preloadPagesCount: 1,
+            onPageChanged: epubController.onPageChanged,
+            physics: const AlwaysScrollableScrollPhysics(),
+            reverse:
+                readerContext?.readingProgression?.isReverseOrder() ?? false,
+            itemCount: spine.length,
+            itemBuilder: (context, position) =>
+                (Platform.isAndroid || Platform.isIOS)
+                    ? WebViewScreen(
+                        address: serverState.address,
+                        link: spine[position],
+                        position: position,
+                        readerContext: readerContext!,
+                        publicationController: epubController,
+                      )
+                    : const SizedBox.shrink(),
+          ),
+          _loading
+              ? LoadingAnimationWidget.hexagonDots(
+                  color: const Color(0xFF1A1A3F), size: 200)
+              : SizedBox()
+        ],
       );
 }

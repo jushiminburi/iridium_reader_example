@@ -33,7 +33,6 @@ class AnnotationPopup extends StatefulWidget {
           selectionListener, selection, style, tint, annotation, highlightId),
     );
   }
-
   @override
   State<StatefulWidget> createState() => AnnotationPopupState();
 }
